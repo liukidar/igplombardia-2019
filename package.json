@@ -1,6 +1,8 @@
 {
   "name": "igplombardia",
-  "version": "0.1.0",
+	"version": "0.1.0",
+	"description": "website igplombardia",
+  "author": "Luca Pinchetti - Matteo Ranzetti",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,7 +11,8 @@
   },
   "dependencies": {
     "core-js": "^3.4.3",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
@@ -29,7 +32,14 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+		},
+		"globals": {
+			"M": "readonly",
+			"imagesLoaded": "readonly",
+			"Masonry": "readonly",
+			"$": "readonly"
+		},
     "parserOptions": {
       "parser": "babel-eslint"
     }

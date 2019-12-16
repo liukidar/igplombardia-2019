@@ -1,28 +1,84 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="!">
+    <navbar></navbar>
+    <main id="body">
+      <router-view/>
+    </main>
+    <footerbar></footerbar>
+    <scroll-up-arrow></scroll-up-arrow>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import './lib/js/materialize.min.js'
+
+import Navbar from './sections/Navbar'
+import Footerbar from './sections/Footerbar'
+import ScrollUpArrow from './components/ScrollUpArrow'
+import { scrollTo } from './lib/js/script'
 
 export default {
   name: 'app',
+  methods: {
+    materialize() {
+      let elems = document.querySelectorAll('.modal')
+      M.Modal.init(elems, {})
+      elems = document.querySelectorAll('.tooltipped')
+      M.Tooltip.init(elems, {})
+    },
+    handleScroll() {
+      if (!this.$route.hash) {
+        this.$router.push('#')
+      }
+    }
+  },
+  created() {
+    window.addEventListener('wheel', this.handleScroll)
+  },
+  destroyed() {
+    window.removeEventListener('wheel', this.handleScroll)
+  },
+  mounted() {
+    this.materialize()
+    scrollTo(this.$route.params.target)
+  },
+  updated() {
+    this.materialize()
+  },
+  watch: {
+    $route(to) {
+      if (to.hash !== '#') {
+        scrollTo(this.$route.params.target)
+      }
+    }
+  },
   components: {
-    HelloWorld
+    // Sections
+    Navbar, Footerbar,
+    // Components
+    ScrollUpArrow
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+@import './lib/css/style.css';
+@import './lib/css/materialize.min.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import 'https://fonts.googleapis.com/css?family=Poiret+One';
+@import 'https://fonts.googleapis.com/css?family=Roboto:300';
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+
+html {
+  font-size: 12px;
 }
+
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  max-width: 100vw;
+}
+
 </style>
