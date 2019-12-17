@@ -1,32 +1,28 @@
 <template>
   <div class="cmp-person">
     <layer class='card'>
-      <div slot-scope="layer" class="center-align">
+      <div slot-scope="layer" @click="(e) => layer.set(e, 'description', 'white')" class="waves-effect center-align">
         <div class="person">
           <br>
           <div>
             <img src="https://visualpharm.com/assets/217/Person%20Female-595b40b85ba036ed117da7ea.svg"/>
-            <a @click="(e) => layer.set(e, 'description', 'white')" class='waves-effect waves-light'>
-              <i class='material-icons white-text'>add</i>
-            </a>
           </div>
         </div>
         <br>
         <p class="flow-text grey-text text-darken-3">
-          STEFANIA ANNOVAZZI
+          {{data.name}}
           <small>
             <br>
-            <a style='display:inline-block'><i class='material-icons left'>mail_outline</i>myemail.true@gmail.com</a>
+            <a style='display:inline-block'><i class='material-icons left'>mail_outline</i>{{data.mail}}</a>
           </small>
         </p>
       </div>
       <div slot="description" slot-scope="layer" class='description left-align'>
-        <i @click="(e) => layer.set(e, '', 'white')" class='waves-effect material-icons grey-text'>close</i>
+        <i @click="(e) => layer.set(e, '', 'white')" class='waves-effect waves-light material-icons grey-text'>close</i>
         <div class="flow-text">
-          <div class='center-align'><b>DIRETTORE</b></div>
+          <div class='center-align'><b>{{data.role}}</b></div>
           <ul class='browser-default'>
-            <li>Architetto</li>
-            <li>Socio Fondatore</li>
+            <li v-for="(el, index) in data.subroles" :key="index">{{el}}</li>
           </ul>
           <hr class='grey lighten-3'>
           <a class='color-main'><i class='material-icons'>book</i> Curriculum</a>
@@ -41,6 +37,16 @@
 import Layer from './Layer'
 
 export default {
+	props: {
+		data: {
+			default: {
+				name: 'Nome Cognome',
+				mail: 'myemail@mail.com',
+				role: 'Main role',
+				subroles: ['Role 1', 'Role 2']
+			}
+		}
+	},
   components: {
     Layer
   }
@@ -72,19 +78,6 @@ export default {
   height: calc(100% - 20px);
   border-radius: 100%;
   transition: all .5s;
-}
-.person > div > a {
-  opacity: 0;
-  background: rgba(0,0,0,0.5);
-  transition: all .5s, opacity .5s .1s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.person:hover > div > a {
-  opacity: 1;
-  box-shadow: 0 0 10px 2px rgba(0,0,0,0.5);
 }
 
 .card {
