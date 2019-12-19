@@ -39,11 +39,13 @@ import Layer from './Layer'
 export default {
 	props: {
 		data: {
-			default: {
-				name: 'Nome Cognome',
-				mail: 'myemail@mail.com',
-				role: 'Main role',
-				subroles: ['Role 1', 'Role 2']
+			default: function() {
+				return {
+					name: 'Nome Cognome',
+					mail: 'myemail@mail.com',
+					role: 'Main role',
+					subroles: ['Role 1', 'Role 2']
+				}
 			}
 		}
 	},
