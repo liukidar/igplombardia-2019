@@ -33,10 +33,10 @@ export default {
     }
   },
   created() {
-    window.addEventListener('wheel', this.handleScroll)
+    window.addEventListener('scroll', this.handleScroll)
   },
   destroyed() {
-    window.removeEventListener('wheel', this.handleScroll)
+    window.removeEventListener('scroll', this.handleScroll)
   },
   mounted() {
     this.materialize()
@@ -63,8 +63,8 @@ export default {
 
 <style>
 
-@import './lib/css/style.css';
 @import './lib/css/materialize.min.css';
+@import './lib/css/style.css';
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 @import 'https://fonts.googleapis.com/css?family=Poiret+One';
 @import 'https://fonts.googleapis.com/css?family=Roboto:300';
