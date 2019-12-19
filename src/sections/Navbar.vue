@@ -28,9 +28,10 @@
         </div>
       </div>
       <div class="nav-content white hide-on-med-and-down">
-        <div class="right grey-text highlight-oh light">
-          <ul class="tabs">
-            <li @click="openLoginModal" class="tab">LOGIN</li>
+        <div class="right">
+          <ul class="tabs right">
+            <li class="grey-text highlight-oh light tab" @click="openLoginModal">LOGIN</li>
+						<li class="grey-text highlight-oh light tab" @click="openCMS">CMS</li>
           </ul>
         </div>
         <div class="container">
@@ -43,12 +44,16 @@
       </div>
     </nav>
     <login></login>
+		<cms></cms>
+		<sidebar></sidebar>
   </header>
 </template>
 
 <script>
 import LanguageSelector from '../components/LanguageSelector'
 import Login from '../modals/Login'
+import Cms from '../modals/Cms'
+import Sidebar from './Sidebar'
 
 import { mapGetters } from 'vuex'
 
@@ -56,6 +61,9 @@ export default {
   methods: {
     openLoginModal() {
       M.Modal.getInstance(document.getElementById('login-modal')).open()
+		},
+		openCMS() {
+			M.Modal.getInstance(document.getElementById('cms-modal')).open()
 		}
   },
   computed: {
@@ -65,8 +73,10 @@ export default {
 		}
   },
   components: {
+		Sidebar,
 		LanguageSelector,
-    Login
+		Login,
+		Cms
   }
 }
 </script>
