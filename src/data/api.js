@@ -1,3 +1,35 @@
+function cached(_ctx, _data, _t) {
+	if (_data.type !== 'GET') {
+		return false
+	}
+	let t = new Date().getTime() - _t
+	if (_data.id) {
+		return _ctx.getters.get(_data.id).cached > t
+	} else {
+		return _ctx.state.cached > t
+	}
+}
+
+export function APIRequest(_ctx, _data, _dbo) {
+	return new Promise((resolve, reject) => {
+		let t = _ctx.state.cacheTime ? _ctx.state.cacheTime : (60 * 1000)
+		if (!cached(_ctx, _data, t)) {
+			_ctx.rootState.api.request(_data.type, _ctx.state.apiTarget, _data.data).then((r) => {
+				if (r.status) {
+					if (_dbo) {
+						r.data = _dbo
+					}
+					_ctx.commit(_data.action, r.data)
+
+					return resolve(r)
+				} else {
+					return reject(r)
+				}
+			}).catch((e) => reject(e))
+		}
+	})
+}
+
 function isIterable(obj) {
   if (obj == null) {
     return false

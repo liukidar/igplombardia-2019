@@ -1,8 +1,8 @@
 <template>
-  <div id="login-modal" class="modal" style="max-width:600px;">
+  <div id="login-modal" class="md-login modal">
     <div class="modal-content">
       <h4>{{$t("login.title")}}</h4>
-      <template v-if="!user">
+      <template v-if="!user()">
         <p class="flow-text">{{$t("login.intro")}}</p>
         <div class="row">
           <div class="input-field col s12">
@@ -22,22 +22,22 @@
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
-            <input id="login-username" :value="user.username" disabled type="text">
+            <input id="login-username" :value="user().username" disabled type="text">
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">mail</i>
-            <input id="login-password" :value="user.mail" disabled type="text">
+            <input id="login-password" :value="user().mail" disabled type="text">
           </div>
         </div>
       </template>
     </div>
-    <div v-if="!user" class="modal-footer row">
-      <a class="col"><button @click="() => login({username, password})" class="btn btn-large left waves-effect waves-light bkg-main">{{$t("login.login")}} <i class="material-icons right">send</i></button></a>
+    <div v-if="!user()" class="modal-footer row">
+      <a class="col"><button @click="() => { login({username, password}); clear() }" class="btn btn-large left waves-effect waves-light bkg-main">{{$t("login.login")}} <i class="material-icons right">send</i></button></a>
       <a class="grey lighten-5 modal-close btn-large left waves-effect waves-dark btn-flat">{{$t("common.cancel")}}</a>
     </div>
     <div v-else class="modal-footer row">
-      <router-link to="/admin/!" class="col"><button class="btn btn-large left waves-effect waves-light bkg-main">{{$t("login.admin")}} <i class="material-icons right">exit_to_app</i></button></router-link>
-      <a class="col"><button @click="logout" class="btn btn-large left waves-effect waves-light bkg-main">{{$t("login.logout")}} <i class="material-icons right">close</i></button></a>
+      <router-link to="/admin/!" class="col"><button class="btn btn-large left waves-effect waves-light bkg-main">{{$t("login.admin")}} <i class="material-icons right hide-on-small-only">exit_to_app</i></button></router-link>
+      <a class="col"><button @click="logout" class="btn btn-large left waves-effect waves-light bkg-main">{{$t("login.logout")}} <i class="material-icons right hide-on-small-only">close</i></button></a>
     </div>
   </div>
 </template>
@@ -53,14 +53,22 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', {user: 'get'})
+    ...mapGetters('user', { user: 'get' })
   },
   methods: {
-    ...mapActions('user', {login: 'load', logout: 'delete'})
+		...mapActions('user', ['login', 'logout']),
+		clear() {
+			this.username = ''
+			this.password = ''
+		}
   }
 }
 </script>
 
-<style>
+<style scoped>
+
+.md-login {
+	max-width: 600px;
+}
 
 </style>
