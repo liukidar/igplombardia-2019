@@ -73,7 +73,7 @@ ul.browser-default > li {
   flex-flow: row;
 }
 .h-flex.center {
-  justify-content: center;
+  align-items: center;
 }
 
 .v-flex.inline, .h-flex.inline {
@@ -140,6 +140,7 @@ ul.browser-default > li {
 
 div.modal.bottom-sheet {
 	max-height: 85%;
+	overflow: hidden;
 }
 
 /* ICONS */
