@@ -28,7 +28,7 @@ export default {
     },
     handleScroll() {
       if (!this.$route.hash) {
-        this.$router.push('#')
+        this.$router.replace('#')
       }
     }
   },
