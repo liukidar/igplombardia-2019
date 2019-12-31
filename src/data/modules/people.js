@@ -22,25 +22,30 @@ export const module = {
     }
   },
   mutations: {
+		list(state, _data) {
+			let t = new Date().getTime()
+			state.cached = t
+			state.items = _data
+		},
     create(_state, _data) {
 			let t = new Date().getTime()
-			for (let i of _data.items) {
+			for (let i of _data) {
 				i.cached = t
 				Vue.set(_state.items, i.id, i)
 			}
     },
-    delete(_state, _data) {
-      Vue.delete(_state.items, _data.id)
-    },
     edit(_state, _data) {
       Vue.set(_state.items, _data.id, _data)
+    },
+    remove(_state, _data) {
+      Vue.delete(_state.items, _data.id)
     }
   },
   actions: {
     list(_ctx) {
       return APIRequest(_ctx, {
         type: 'GET',
-        action: 'create'
+        action: 'list'
       }, dbo.people)
     }
   }

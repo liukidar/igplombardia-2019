@@ -23,7 +23,7 @@ export const module = {
     load(_state, _data) {
 			_state.user = _data
     },
-    delete(_state) {
+    remove(_state) {
       _state.user = null
     }
   },
@@ -39,7 +39,7 @@ export const module = {
       return APIRequest(_ctx, {
         data: { action: 'logout' },
         type: 'POST',
-        action: 'delete'
+        action: 'remove'
       })
     }
   }

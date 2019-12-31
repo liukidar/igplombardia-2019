@@ -1,6 +1,14 @@
 import Vue from 'vue'
 import { APIRequest } from '../api'
 
+let dbo = {
+	files: [
+		{ id: 0 },
+		{ id: 1 },
+		{ id: 2 }
+	]
+}
+
 export const module = {
   namespaced: true,
   state: {
@@ -26,16 +34,23 @@ export const module = {
 		edit(state, _data) {
 			state.edit = _data.value
 		},
+		list(state, _data) {
+			let t = new Date().getTime()
+			state.cached = t
+			for (let i of _data) {
+				Vue.set(state.items, i.id, i)
+			}
+		},
 		create(state, _data) {
 			let t = new Date().getTime()
-			for (let i of _data.items) {
+			for (let i of _data) {
 				i.cached = t
 				Vue.set(state.items, i.id, i)
 			}
 		},
-		delete(state, _data) {
-			for (let i of _data.items) {
-				Vue.delete(state.items, i.id)
+		remove(state, _data) {
+			for (let i in _data) {
+				Vue.delete(state.items, i)
 			}
 		}
 	},
@@ -49,8 +64,8 @@ export const module = {
 		list(_ctx) {
 			return APIRequest(_ctx, {
 				type: 'GET',
-				action: 'create'
-			})
+				action: 'list'
+			}, dbo.files)
 		},
 		create(_ctx, _data) {
 			return APIRequest(_ctx, {
@@ -59,12 +74,12 @@ export const module = {
 				data: _data
 			})
 		},
-		delete(_ctx, _data) {
+		remove(_ctx, _data) {
 			return APIRequest(_ctx, {
 				type: 'DELETE',
-				action: 'delete',
+				action: 'remove',
 				data: _data
-			})
+			}, _data)
 		}
 	}
 }
