@@ -11,7 +11,7 @@
           <router-link class="left" to="/!"><i class="material-icons color-main hide-on-large-only">home</i></router-link>
 					<router-link :to="`${activePage.href}/!`" class="brand-logo color-main">{{$t(`pages.${activePage.id}.title`)}}</router-link>
           <ul class="btn-sidebar hide-on-large-only">
-            <li><a data-target="slide-out" class="sidenav-trigger"><i class="material-icons grey-text text-lighten-2">menu</i></a></li>
+            <li><a data-target="slide-out" class="sidenav-trigger"><i class="material-icons grey-text text-lighten-1">menu</i></a></li>
           </ul>
           <ul class="right hide-on-med-and-down">
             <li>

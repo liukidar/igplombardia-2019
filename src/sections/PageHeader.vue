@@ -13,7 +13,7 @@
       </tr-slide-in>
     </div>
     <tr-slide-in stagger="1000" :settings="{from : '-100vw, 0'}" class="ch-tr1 container">
-      <div :key="0" data-index="1" class="flow-text" style="margin:2rem 0 2rem 0;">
+      <div :key="0" data-index="1" class="flow-text" style="margin: 2rem 0 2rem 0;">
         <small>
           <slot name="description"></slot>
         </small>

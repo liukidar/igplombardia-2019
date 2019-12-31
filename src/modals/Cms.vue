@@ -19,29 +19,29 @@
 			</div>
       <transition-group name="grid" tag="div" class="file-previews row">
 				<div v-for="img in files" :key="img.id" class="col s4 m2 l1">
-					<div v-hold="() => selectMode = true" @click="toggle(img.id)" class="r1-1 img-preview" :class="{ selected: isSelected(img.id) }"></div>
+					<div v-hold="() => selectMode = true" @click="toggle(img.id)" class="r1-1 img-preview" :class="{ selected: isSelected(img.id) }">
+						<i class="material-icons color-main">check_circle</i>
+					</div>
 				</div>
 			</transition-group>
     </div>
-		<div class="upload-content bkg-main white-text">
-			<div class="vertical-flex center center-align" style="height:100%;" @dragover.prevent="status = 1" @dragleave.prevent="status = 0" @drop.prevent="upload($event)">
-				<div style="position: relative; pointer-events: none;">
-					<div v-if="status == 2" class="preloader-wrapper big active absolute-center-aligned">
-						<div class="spinner-layer">
-							<div class="circle-clipper left" style="border-color: white">
-								<div class="circle"></div>
-							</div><div class="gap-patch">
-								<div class="circle"></div>
-							</div><div class="circle-clipper right" style="border-color: white">
-								<div class="circle"></div>
-							</div>
+		<div class="upload-content bkg-main white-text vertical-flex center center-align" @dragover.prevent="status = 1" @dragleave.prevent="status = 0" @drop.prevent="upload($event)">
+			<div style="position: relative; pointer-events: none;">
+				<div v-if="status == 2" class="preloader-wrapper big active absolute-center-aligned">
+					<div class="spinner-layer">
+						<div class="circle-clipper left" style="border-color: white">
+							<div class="circle"></div>
+						</div><div class="gap-patch">
+							<div class="circle"></div>
+						</div><div class="circle-clipper right" style="border-color: white">
+							<div class="circle"></div>
 						</div>
 					</div>
-					<i class="material-icons" :style="{'transform': status > 0 ? 'scale(0.6)' : ''}">cloud_upload</i>
 				</div>
-				<br>
-				<span class="text-important uppercase">{{info[status]}}</span>
+				<i class="material-icons" :style="{'transform': status > 0 ? '' : 'scale(1.4)'}">cloud_upload</i>
 			</div>
+			<br>
+			<span class="text-important uppercase">{{info[status]}}</span>
 		</div>
   </div>
 </template>
@@ -137,16 +137,34 @@ export default {
 }
 
 .upload-content {
-	padding: 2rem;
+	padding: 4rem;
+}
+
+.upload-content i {
+	transition: .5s;
 }
 
 .img-preview {
 	border: 1px solid #DDD;
-	transition: .5s
+	transition: .5s;
+	position: relative;
 }
 
 .img-preview.selected {
 	transform: scale(0.8);
+}
+
+.img-preview > i.material-icons {
+	transform: scale(0);
+	transition: .5s;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	font-size: 32px;
+}
+
+.img-preview.img-preview.selected > i {
+	transform: scale(1);
 }
 
 .row.file-previews > .col {
