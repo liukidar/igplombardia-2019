@@ -66,6 +66,10 @@ export function API(path, version) {
       ajaxRequest.setRequestHeader('Cache-Control', 'no-cache')
       ajaxRequest.onreadystatechange = function() {
         if (ajaxRequest.readyState === XMLHttpRequest.DONE) {
+					for (let header in data.headers) {
+						headers.set(header, data.headers[header])
+					}
+
           if (ajaxRequest.status === 200) {
             let r = JSON.parse(ajaxRequest.responseText)
             r.status = ajaxRequest.status
