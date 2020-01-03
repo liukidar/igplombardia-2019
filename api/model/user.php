@@ -18,10 +18,10 @@ class User
 		$res = $this->VTM->get('user.requestAuthToken', [
 			'fields' => ['id', 'mail', 'password', 'accessFlag', 'username'],
 			'where' => 'mail = ?',
-			'params' => [$mail]
+			'params' => [$_mail]
 		]);
 		while($user = $res->next()) {
-			if(password_verify($password, $user['password'])) {
+			if(password_verify($_password, $user['password'])) {
 				// Token granted
 				$token = bin2hex(random_bytes(64));
 				$this->VTM->post('token.set', [
@@ -47,7 +47,7 @@ class User
 			'params' => [$_token, time()]
 		]);
 
-		setHeader('Auth-Token', false);
+		setHeader('Auth-Token', '');
 
 		return;
 	}
@@ -82,12 +82,12 @@ class User
 				]);
 
 				// Create a new token
-				$token = bin2hex(random_bytes(64));
+				$_token = bin2hex(random_bytes(64));
 				$this->VTM->post('token.set', [
-						'fields' => ['token' => $token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + $this->validityTime)]
+						'fields' => ['token' => $_token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + $this->validityTime)]
 				]);
 
-				setHeader('Auth-Token', $token);
+				setHeader('Auth-Token', $_token);
 			}
 
 			return $_user['user.accessFlag'];
