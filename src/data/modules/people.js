@@ -41,7 +41,7 @@ export const module = {
     }
   },
   actions: {
-    list(_ctx) {
+    _list(_ctx) {
       return APIRequest(_ctx, {
         type: 'GET',
         action: 'list'

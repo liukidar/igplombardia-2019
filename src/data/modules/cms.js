@@ -54,26 +54,26 @@ export const module = {
 		}
 	},
 	actions: {
-		target(_ctx, _data) {
+		_target(_ctx, _data) {
 			_ctx.commit('target', _data)
 		},
-		edit(_ctx, _data) {
+		_edit(_ctx, _data) {
 			_ctx.commit('edit', _data)
 		},
-		list(_ctx) {
+		_list(_ctx) {
 			return APIRequest(_ctx, {
 				type: 'GET',
 				action: 'list'
 			}, dbo.files)
 		},
-		create(_ctx, _data) {
+		_create(_ctx, _data) {
 			return APIRequest(_ctx, {
 				type: 'POST',
 				action: 'create',
 				data: _data
 			})
 		},
-		remove(_ctx, _data) {
+		_remove(_ctx, _data) {
 			return APIRequest(_ctx, {
 				type: 'DELETE',
 				action: 'remove',

@@ -56,7 +56,7 @@ export default {
     ...mapGetters('user', { user: 'get' })
   },
   methods: {
-		...mapActions('user', { _login: 'login', logout: 'logout' }),
+		...mapActions('user', ['_login', '_logout']),
 		login() {
 			this._login({ username: this.username, password: this.password })
 				.then(() => { M.toast({ html: 'Login effettuato' }) })

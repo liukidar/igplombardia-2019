@@ -28,14 +28,14 @@ export const module = {
     }
   },
   actions: {
-    login(_ctx, _data) {
+    _login(_ctx, _data) {
       return APIRequest(_ctx, {
         data: { action: 'login', ..._data },
         type: 'POST',
         action: 'load'
       })
     },
-    logout(_ctx) {
+    _logout(_ctx) {
       return APIRequest(_ctx, {
         data: { action: 'logout' },
         type: 'POST',
