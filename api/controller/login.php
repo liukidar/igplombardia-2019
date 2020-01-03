@@ -14,7 +14,7 @@ $vtm = new VTM($sql);
 $user = new User($vtm);
 
 if ($_DATA['action'] == 'login') {
-  $user->requestAuthToken($_DATA['mail'], $_DATA['password']);
+  $user->requestAuthToken($_DATA['username'], $_DATA['password']);
 } else if ($_DATA['action'] == 'logout') {
 	$user->clearAuthToken($_SERVER['HTTP_AUTH_TOKEN']);
 } else {
