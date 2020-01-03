@@ -21,7 +21,7 @@ export const module = {
   },
   mutations: {
     load(_state, _data) {
-			_state.user = _data
+			_state.user = _data.user
     },
     remove(_state) {
       _state.user = null
