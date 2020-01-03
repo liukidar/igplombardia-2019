@@ -67,19 +67,19 @@ export function API(path, version) {
         payload = JSON.stringify(data)
       }
 
-      for (let header in headers.data) {
-        ajaxRequest.setRequestHeader(header, headers.data[header])
+      for (let header in headers) {
+				ajaxRequest.setRequestHeader(header, headers[header])
       }
       ajaxRequest.setRequestHeader('Cache-Control', 'no-cache')
       ajaxRequest.onreadystatechange = function() {
         if (ajaxRequest.readyState === XMLHttpRequest.DONE) {
-					for (let header in data.headers) {
-						headers.set(header, data.headers[header])
+					let r = JSON.parse(ajaxRequest.responseText)
+
+					for (let header in r.headers) {
+						headers[header] = r.headers[header]
 					}
 
           if (ajaxRequest.status === 200) {
-            let r = JSON.parse(ajaxRequest.responseText)
-            
             resolve(r)
           } else {
             reject(ajaxRequest.status)
@@ -96,10 +96,7 @@ export function API(path, version) {
   }
 
   return {
-    headers: {
-      data: {},
-      set: function(name, data) { this.data[name] = data }
-    },
+    headers: {},
     request: function(method, target, data) { return request(method, path + '/' + version + '/controller/' + target + '.php', data, this.headers) }
   }
 }
