@@ -13,7 +13,7 @@ function cached(_ctx, _data, _t) {
 export function APIRequest(_ctx, _data, _dbo) {
 	return new Promise((resolve, reject) => {
 		let t = _ctx.state.cacheTime ? _ctx.state.cacheTime : (60 * 1000)
-		if (!cached(_ctx, _data, t)) {
+		if (!cached(_ctx, _data.data, t)) {
 			_ctx.rootState.api.request(_data.type, _ctx.state.apiTarget, _data.data).then((r) => {
 				if (r.status) {
 					if (_dbo) {
@@ -26,6 +26,13 @@ export function APIRequest(_ctx, _data, _dbo) {
 					return reject(r)
 				}
 			}).catch((e) => reject(e))
+		}
+		else {
+			resolve({
+				status: true,
+				data: _ctx.getters.get(_data.data.id),
+				cached: true
+			})
 		}
 	})
 }
@@ -72,8 +79,7 @@ export function API(path, version) {
 
           if (ajaxRequest.status === 200) {
             let r = JSON.parse(ajaxRequest.responseText)
-            r.status = ajaxRequest.status
-
+            
             resolve(r)
           } else {
             reject(ajaxRequest.status)
@@ -94,6 +100,6 @@ export function API(path, version) {
       data: {},
       set: function(name, data) { this.data[name] = data }
     },
-    request: function(method, target, data) { return request(method, path + '/' + version + '/' + target + '.php', data, this.headers) }
+    request: function(method, target, data) { return request(method, path + '/' + version + '/controller/' + target + '.php', data, this.headers) }
   }
 }
