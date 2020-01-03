@@ -58,13 +58,20 @@ export default {
   methods: {
 		...mapActions('user', ['_login', '_logout']),
 		login() {
-			this._login({ username: this.username, password: this.password })
+			if (this.username && this.password) {
+				this._login({ username: this.username, password: this.password })
 				.then(() => { M.toast({ html: 'Login effettuato' }) })
 				.catch(() => { M. toast({ html: 'Credenziali invalide', classes: 'red' }) })
+				this.username = ''
+				this.password = ''
+			} else {
+				M.toast({ html: 'Nome utente o password mancanti', classes: 'red' })
+			}
 		},
-		clear() {
-			this.username = ''
-			this.password = ''
+		logout() {
+			this._logout().then(() => {
+				M.toast( { html: 'Logout effettuato' })
+			})
 		}
   }
 }
