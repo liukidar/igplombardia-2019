@@ -13,7 +13,6 @@ export const module = {
   state: {
     items: {},
     apiTarget: 'temp',
-		cached: null,
 		cacheTime: 5 * 60 * 1000
   },
   getters: {

@@ -16,7 +16,6 @@ export const module = {
 		target: null,
 		edit: false,
 		apiTarget: 'temp',
-		cached: null,
 		cacheTime: 5 * 60 * 1000
   },
   getters: {
