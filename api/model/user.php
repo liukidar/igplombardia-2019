@@ -1,6 +1,6 @@
 <?php
 
-require_once("../lib.php");
+require_once("../lib/lib.php");
 
 class User
 {
@@ -16,7 +16,7 @@ class User
 	public function requestAuthToken($_mail, $_password)
 	{
 		$res = $this->VTM->get('user.requestAuthToken', [
-			'fields' => ['id', 'mail', 'password'],
+			'fields' => ['id', 'mail', 'password', 'accessFlag', 'username'],
 			'where' => 'mail = ?',
 			'params' => [$mail]
 		]);
@@ -24,29 +24,30 @@ class User
 			if(password_verify($password, $user['password'])) {
 				// Token granted
 				$token = bin2hex(random_bytes(64));
-				$this->VTM->post('authToken.set', [
-						'fields' => ['token' => $token, 'user' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + $this->validityTime)]
+				$this->VTM->post('token.set', [
+						'fields' => ['token' => $token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + $this->validityTime)]
 				]);
 
-				setHeader('authToken', $token);
+				setHeader('Auth-Token', $token);
+				setData('user', ['id' => $user['id'], 'mail' => $user['mail'], 'username' => $user['username']]);
 
 				return true;
 			}
 		}
 
-		pushMsg(ERROR, "USER_NOT_FOUND");
+		pushError("INVALID_CREDENTIALS");
 
 		return false;
 	}
 
 	public function clearAuthToken($_token)
 	{
-		$this->VTM->delete('authToken.delete', [
+		$this->VTM->delete('token.delete', [
 			'where' => 'token = ? OR validity < ?',
 			'params' => [$_token, time()]
 		]);
 
-		setHeader('authToken', false);
+		setHeader('Auth-Token', false);
 
 		return;
 	}
@@ -54,12 +55,12 @@ class User
 	public function checkAuthToken($_token)
 	{
 		if (!$_token) {
-			pushMsg(ERROR, "NULL_TOKEN");
+			pushError("NULL_TOKEN");
 
 			return false;
 		}
 
-		$res = $this->VTM->get('authToken.check', [
+		$res = $this->VTM->get('token.check', [
 			'fields' => ['user.accessFlag', 'validity'],
 			'where' => 'token = ? AND ip = ?',
 			'params' => [$_token, $_SERVER['REMOTE_ADDR']]
@@ -68,22 +69,31 @@ class User
 		if ($_user = $res->next()) {
 			$validity = $_user['validity'] - time();
 			if ($validity < 0) {
-				pushMsg(ERROR, "EXPIRED_TOKEN");
+				pushError("EXPIRED_TOKEN");
 
 				return false;
 			}
 			if ($validity < $validityTime / 2) {
-				$this->VTM->put('authToken.update', [
-					'fields' => ['validity' => (time() + $this->validityTime)],
+				// Set validity of current token to 1 min
+				$this->VTM->put('token.update', [
+					'fields' => ['validity' => (time() + 60)],
 					'where' => 'token = ? AND ip = ?',
 					'params' => [$_token, $_SERVER['REMOTE_ADDR']]
 				]);
+
+				// Create a new token
+				$token = bin2hex(random_bytes(64));
+				$this->VTM->post('token.set', [
+						'fields' => ['token' => $token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + $this->validityTime)]
+				]);
+
+				setHeader('Auth-Token', $token);
 			}
 
 			return $_user['user.accessFlag'];
 		}
 
-		pushMsg(ERROR, "INVALID_TOKEN");
+		pushError("INVALID_TOKEN");
 
 		return false;
 	}
