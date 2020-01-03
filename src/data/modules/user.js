@@ -1,18 +1,18 @@
 import { APIRequest } from '../api'
 
-let dbo = {
+/* let dbo = {
   user: {
     username: 'Luca',
     mail: 'pincoluca1@gmail.com',
     access: { view: true }
   }
-}
+} */
 
 export const module = {
   namespaced: true,
   state: {
     user: null,
-		apiTarget: 'temp'
+		apiTarget: 'login'
   },
   getters: {
     get(_state) {
@@ -30,10 +30,10 @@ export const module = {
   actions: {
     login(_ctx, _data) {
       return APIRequest(_ctx, {
-        data: { action: 'login', data: _data },
+        data: { action: 'login', ..._data },
         type: 'POST',
         action: 'load'
-      }, dbo.user)
+      })
     },
     logout(_ctx) {
       return APIRequest(_ctx, {

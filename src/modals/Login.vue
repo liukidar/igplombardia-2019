@@ -32,7 +32,7 @@
       </template>
     </div>
     <div v-if="!user()" class="modal-footer row">
-      <a class="col"><button @click="() => { login({username, password}); clear() }" class="btn btn-large left waves-effect waves-light bkg-main">{{$t("login.login")}} <i class="material-icons right">send</i></button></a>
+      <a class="col"><button @click="login" class="btn btn-large left waves-effect waves-light bkg-main">{{$t("login.login")}} <i class="material-icons right">send</i></button></a>
       <a class="grey lighten-5 modal-close btn-large left waves-effect waves-dark btn-flat">{{$t("common.cancel")}}</a>
     </div>
     <div v-else class="modal-footer row">
@@ -56,7 +56,12 @@ export default {
     ...mapGetters('user', { user: 'get' })
   },
   methods: {
-		...mapActions('user', ['login', 'logout']),
+		...mapActions('user', { _login: 'login', logout: 'logout' }),
+		login() {
+			this._login({ username: this.username, password: this.password })
+				.then(() => { M.toast({ html: 'Login effettuato' }) })
+				.catch(() => { M. toast({ html: 'Credenziali invalide', classes: 'red' }) })
+		},
 		clear() {
 			this.username = ''
 			this.password = ''
