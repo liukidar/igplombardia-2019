@@ -4,13 +4,14 @@ require_once("../lib/lib.php");
 
 class User
 {
+	const VALIDITY_TIME = 3600;
+
 	private $VTM;
-	private $validityTime;
 
 	public function __construct($_VTM)
 	{
 		$this->VTM = $_VTM;
-		$this->validityTime = 3600;
+		User::VALIDITY_TIME = 3600;
 	}
 
 	public function requestAuthToken($_mail, $_password)
@@ -25,7 +26,7 @@ class User
 				// Token granted
 				$token = bin2hex(random_bytes(64));
 				$this->VTM->post('token.set', [
-						'fields' => ['token' => $token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + $this->validityTime)]
+						'fields' => ['token' => $token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + self::VALIDITY_TIME)]
 				]);
 
 				setHeader('Auth-Token', $token);
@@ -76,7 +77,7 @@ class User
 			if ($validity < $validityTime / 2) {
 				// Set validity of current token to 1 min
 				$this->VTM->put('token.update', [
-					'fields' => ['validity' => (time() + 60)],
+					'fields' => ['validity' => (time() + 16)],
 					'where' => 'token = ? AND ip = ?',
 					'params' => [$_token, $_SERVER['REMOTE_ADDR']]
 				]);
@@ -84,7 +85,7 @@ class User
 				// Create a new token
 				$_token = bin2hex(random_bytes(64));
 				$this->VTM->post('token.set', [
-						'fields' => ['token' => $_token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + $this->validityTime)]
+						'fields' => ['token' => $_token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + self::VALIDITY_TIME)]
 				]);
 
 				setHeader('Auth-Token', $_token);
