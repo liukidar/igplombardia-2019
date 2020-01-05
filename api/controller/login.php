@@ -13,12 +13,22 @@ $sql = new MySQL(DB_HOST, DB_USER, DB_PSW, DB_NAME);
 $vtm = new VTM($sql);
 $user = new User($vtm);
 
-if ($_DATA['action'] == 'login') {
-  $user->requestAuthToken($_DATA['username'], $_DATA['password']);
-} else if ($_DATA['action'] == 'logout') {
-	$user->clearAuthToken($_SERVER['HTTP_AUTH_TOKEN']);
-} else {
-	http_response_code(400);
+switch ($_SERVER['REQUEST_METHOD']) {
+	case 'POST':
+		if ($_DATA['action'] == 'login') {
+			$user->requestAuthToken($_DATA['username'], $_DATA['password']);
+		} else if ($_DATA['action'] == 'logout') {
+			$user->clearAuthToken($_SERVER['HTTP_AUTH_TOKEN']);
+		} else {
+			http_response_code(400);
+		}
+		
+		break;
+	case 'OPTIONS':
+    break;
+	default:
+		http_response_code(405);
+    break;
 }
 
 echo output();
