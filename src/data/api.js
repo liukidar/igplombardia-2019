@@ -3,8 +3,8 @@ function cached(_ctx, _data, _t) {
 		return false
 	}
 	let t = new Date().getTime() - _t
-	if (_data.id) {
-		return _ctx.getters.get(_data.id).cached > t
+	if (_data.resource.id) {
+		return _ctx.getters.get(_data.resource.id).cached > t
 	} else {
 		return _ctx.state.cached > t
 	}
@@ -13,8 +13,8 @@ function cached(_ctx, _data, _t) {
 export function APIRequest(_ctx, _data, _dbo) {
 	return new Promise((resolve, reject) => {
 		let t = _ctx.state.cacheTime ? _ctx.state.cacheTime : (60 * 1000)
-		if (!cached(_ctx, _data.data, t)) {
-			_ctx.rootState.api.request(_data.type, _ctx.state.apiTarget, _data.data).then((r) => {
+		if (!cached(_ctx, _data, t)) {
+			_ctx.rootState.api.request(_data.type, _ctx.state.apiTarget, _data.resource, _data.body).then((r) => {
 				if (r.status) {
 					if (_dbo) {
 						r.data = _dbo
@@ -30,47 +30,70 @@ export function APIRequest(_ctx, _data, _dbo) {
 		else {
 			resolve({
 				status: true,
-				data: _ctx.getters.get(_data.data.id),
+				data: _ctx.getters.get(_data.resource.id),
 				cached: true
 			})
 		}
 	})
 }
 
-function isIterable(obj) {
-  if (obj == null) {
-    return false
-  }
-  return Array.isArray(obj) || typeof obj === 'object'
+function objectToFormData(obj) {
+	let formData = new FormData();
+
+	function appendFormData(data, root = '') {
+		if (data instanceof File) {
+			formData.append(root, data);
+		} else if (Array.isArray(data)) {
+			for (let i = 0; i < data.length; i++) {
+				appendFormData(data[i], root + '[' + i + ']');
+			}
+		} else if (typeof data === 'object' && data) {
+			for (let key in data) {
+				if (data.hasOwnProperty(key)) {
+					if (root === '') {
+						appendFormData(data[key], key);
+					} else {
+						appendFormData(data[key], root + '.' + key);
+					}
+				}
+			}
+		} else {
+			if (data !== null && typeof data !== 'undefined') {
+				formData.append(root, data);
+			}
+		}
+	}
+	appendFormData(obj);
+
+	return formData;
 }
 
 export function API(path, version) {
-  function request(method, target, data, headers) {
+  function request(method, target, resource, body, headers) {
     return new Promise((resolve, reject) => {
       let ajaxRequest = new XMLHttpRequest()
-      let payload = ''
+			let payload = null
+			
+			let query = []
+			for (let property in resource) {
+				if (Array.isArray(resource[property])) {
+					for (let value of resource[property]) {
+						query.push(encodeURIComponent(property) + '[]=' + encodeURIComponent(value))
+					}
+				} else {
+					query.push(encodeURIComponent(property) + '=' + encodeURIComponent(resource[property]))
+				}
+			}
+			target += '?' + query.join('&')
 
-      if (method === 'GET' || method === 'DELETE') {
-        if (isIterable(data)) {
-          for (let value in data) {
-            if (data[value] !== undefined) {
-              payload += '/' + encodeURIComponent(data[value])
-            }
-          }
-        } else {
-          payload = '/' + encodeURIComponent(data)
-        }
-        ajaxRequest.open(method, target + payload)
-      } else {
-        ajaxRequest.open(method, target)
-        ajaxRequest.setRequestHeader('Content-Type', 'application/json')
-        payload = JSON.stringify(data)
-      }
+			if (method == 'POST' || method == 'PUT') {
+				payload = objectToFormData(body)
+			}
 
+			ajaxRequest.open(method, target)
       for (let header in headers) {
 				ajaxRequest.setRequestHeader(header, headers[header])
       }
-      ajaxRequest.setRequestHeader('Cache-Control', 'no-cache')
       ajaxRequest.onreadystatechange = function() {
         if (ajaxRequest.readyState === XMLHttpRequest.DONE) {
 					let r = JSON.parse(ajaxRequest.responseText)
@@ -85,18 +108,14 @@ export function API(path, version) {
             reject(ajaxRequest.status)
           }
         }
-      }
-
-      if (method === 'GET' || method === 'DELETE') {
-        ajaxRequest.send()
-      } else {
-        ajaxRequest.send(payload)
-      }
+			}
+			
+			ajaxRequest.send(payload)
     })
   }
 
   return {
     headers: {},
-    request: function(method, target, data) { return request(method, path + '/' + version + '/controller/' + target + '.php', data, this.headers) }
+    request: function(method, target, resource, body) { return request(method, path + '/' + version + '/controller/' + target + '.php', resource, body, this.headers) }
   }
 }

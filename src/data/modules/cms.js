@@ -66,19 +66,20 @@ export const module = {
 				action: 'list'
 			}, dbo.files)
 		},
-		_create(_ctx, _data) {
+		_create(_ctx, { resource, body }) {
 			return APIRequest(_ctx, {
 				type: 'POST',
 				action: 'create',
-				data: _data
+				resource,
+				body
 			})
 		},
-		_remove(_ctx, _data) {
+		_remove(_ctx, { resource }) {
 			return APIRequest(_ctx, {
 				type: 'DELETE',
 				action: 'remove',
-				data: _data
-			}, _data)
+				resource
+			})
 		}
 	}
 }

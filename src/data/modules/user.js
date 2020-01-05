@@ -30,15 +30,14 @@ export const module = {
   actions: {
     _login(_ctx, _data) {
       return APIRequest(_ctx, {
-        data: { action: 'login', ..._data },
         type: 'POST',
-        action: 'load'
+        action: 'load',
+        body: _data
       })
     },
     _logout(_ctx) {
       return APIRequest(_ctx, {
-        data: { action: 'logout' },
-        type: 'POST',
+        type: 'DELETE',
         action: 'remove'
       })
     }

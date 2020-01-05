@@ -9,6 +9,3 @@ define('DB_NAME', 'my_libricope');
 
 define('AUTH_TOKEN', 'Auth-Token');
 define('HTTP_AUTH_TOKEN', 'HTTP_AUTH_TOKEN');
-
-$rest_json = file_get_contents("php://input");
-$_DATA = json_decode($rest_json, true);
