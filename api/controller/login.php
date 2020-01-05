@@ -15,19 +15,18 @@ $user = new User($vtm);
 
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
-		if ($_DATA['action'] == 'login') {
-			$user->requestAuthToken($_DATA['username'], $_DATA['password']);
-		} else if ($_DATA['action'] == 'logout') {
-			$user->clearAuthToken($_SERVER[HTTP_AUTH_TOKEN]);
-		} else {
-			http_response_code(400);
-		}
+		$user->requestAuthToken($_POST['username'], $_POST['password']);
 		
+		break;
+	case 'DELETE':
+		$user->clearAuthToken($_SERVER[HTTP_AUTH_TOKEN]);
+
 		break;
 	case 'OPTIONS':
     break;
 	default:
 		http_response_code(405);
+
     break;
 }
 
