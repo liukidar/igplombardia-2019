@@ -29,7 +29,7 @@ class User
 						'fields' => ['token' => $token, 'userid' => $user['id'], 'ip' => $_SERVER['REMOTE_ADDR'], 'validity' => (time() + self::VALIDITY_TIME)]
 				]);
 
-				setHeader('Auth-Token', $token);
+				setHeader(AUTH_TOKEN, $token);
 				setData('user', ['id' => $user['id'], 'mail' => $user['mail'], 'username' => $user['username']]);
 
 				return true;

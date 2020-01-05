@@ -18,7 +18,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		if ($_DATA['action'] == 'login') {
 			$user->requestAuthToken($_DATA['username'], $_DATA['password']);
 		} else if ($_DATA['action'] == 'logout') {
-			$user->clearAuthToken($_SERVER['HTTP_AUTH_TOKEN']);
+			$user->clearAuthToken($_SERVER[HTTP_AUTH_TOKEN]);
 		} else {
 			http_response_code(400);
 		}
