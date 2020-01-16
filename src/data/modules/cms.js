@@ -1,21 +1,13 @@
 import Vue from 'vue'
 import { APIRequest } from '../api'
 
-let dbo = {
-	files: [
-		{ id: 0 },
-		{ id: 1 },
-		{ id: 2 }
-	]
-}
-
 export const module = {
   namespaced: true,
   state: {
 		items: {},
 		target: null,
 		edit: false,
-		apiTarget: 'temp',
+		apiTarget: 'cms',
 		cacheTime: 5 * 60 * 1000
   },
   getters: {
@@ -36,19 +28,19 @@ export const module = {
 		list(state, _data) {
 			let t = new Date().getTime()
 			state.cached = t
-			for (let i of _data) {
+			for (let i of _data.files) {
 				Vue.set(state.items, i.id, i)
 			}
 		},
 		create(state, _data) {
 			let t = new Date().getTime()
-			for (let i of _data) {
+			for (let i of _data.files) {
 				i.cached = t
 				Vue.set(state.items, i.id, i)
 			}
 		},
 		remove(state, _data) {
-			for (let i in _data) {
+			for (let i of _data.files) {
 				Vue.delete(state.items, i)
 			}
 		}
@@ -63,8 +55,9 @@ export const module = {
 		_list(_ctx) {
 			return APIRequest(_ctx, {
 				type: 'GET',
-				action: 'list'
-			}, dbo.files)
+				action: 'list',
+				resource: {}
+			})
 		},
 		_create(_ctx, { resource, body }) {
 			return APIRequest(_ctx, {
