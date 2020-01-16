@@ -48,7 +48,8 @@ ul.browser-default > li {
 .flex-filler {
   flex: 1;
   display: flex;
-  flex-flow: inherit;
+	flex-flow: inherit;
+	overflow: hidden;
 }
 .no-width {
   width: 0 !important;
@@ -143,6 +144,11 @@ div.modal.bottom-sheet {
 	overflow: hidden;
 }
 
+@media all and (min-width: 993px) {
+	div.modal.bottom-sheet {
+		max-height: 65%;
+	}
+}
 /* ICONS */
 
 .fa {
