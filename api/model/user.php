@@ -11,7 +11,6 @@ class User
 	public function __construct($_VTM)
 	{
 		$this->VTM = $_VTM;
-		User::VALIDITY_TIME = 3600;
 	}
 
 	public function requestAuthToken($_mail, $_password)
@@ -91,7 +90,9 @@ class User
 				setHeader('Auth-Token', $_token);
 			}
 
-			return $_user['user.accessFlag'];
+			$r = flag2access($_user['user.accessFlag']);
+
+			return $r;
 		}
 
 		pushError("INVALID_TOKEN");

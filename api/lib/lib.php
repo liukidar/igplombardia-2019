@@ -2,6 +2,7 @@
 
 require_once 'MySQL.php';
 require_once 'VTO/VTO.php';
+require_once 'access.php';
 
 define("ERROR", 0);
 define("WARNING", 1);
