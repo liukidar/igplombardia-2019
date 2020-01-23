@@ -2,16 +2,22 @@
   <div class="pg-home">
 		<div class="full-screen v-flex flex-filler">
       <slider :indicators="false" class="flex-filler">
-				<tile class="flex-filler" :bkg="require('@/assets/imgs/sample-1.jpg')">
+				<tile class="flex-filler" :bkg="require('@/assets/imgs/slideshow-01.jpg')">
 					<template slot="title">TITLE 1</template>
 				</tile>
-				<tile class="flex-filler" :bkg="require('@/assets/imgs/sample-2.jpg')">
+				<tile class="flex-filler" :bkg="require('@/assets/imgs/slideshow-02.jpg')">
 					<template slot="title">TITLE 1</template>
 				</tile>
-				<tile class="flex-filler" :bkg="require('@/assets/imgs/sample-3.jpg')">
+				<tile class="flex-filler" :bkg="require('@/assets/imgs/slideshow-03.jpg')">
 					<template slot="title">TITLE 1</template>
 				</tile>
-				<tile class="flex-filler" :bkg="require('@/assets/imgs/sample-4.jpg')">
+				<tile class="flex-filler" :bkg="require('@/assets/imgs/slideshow-04.jpg')">
+					<template slot="title">TITLE 1</template>
+				</tile>
+				<tile class="flex-filler" :bkg="require('@/assets/imgs/slideshow-05.jpg')">
+					<template slot="title">TITLE 1</template>
+				</tile>
+				<tile class="flex-filler" :bkg="require('@/assets/imgs/slideshow-06.jpg')">
 					<template slot="title">TITLE 1</template>
 				</tile>
 			</slider>
