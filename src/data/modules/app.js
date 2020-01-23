@@ -7,7 +7,7 @@ export const module = {
       href: '',
       icon: 'home',
       color: 'main-color',
-      sections: ['description', 'news']
+      sections: ['description', /*'news'*/]
     },
     pages: {
       information: {

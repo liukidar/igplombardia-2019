@@ -22,16 +22,18 @@
 				</tile>
 			</slider>
 			<page-header to="description" class="absolute-center-aligned v-flex center white-text text-important center-align">
-				<template slot="title">IGP  Lombardia</template>
-				<template slot="subtitle">{{$t('phst')}}</template>
+				<template slot="title">{{$t('pages.home.sections.slider.title')}}</template>
+				<!--<template slot="subtitle">{{$t('phst')}}</template>
 				<template slot="description">{{$t('phd')}}</template>
+				-->
 			</page-header>
     </div>
 		<div id="description" class="container section">
-      <h2 class="center-align title text-important">{{$t('pht')}}</h2>
+      <h2 class="center-align title text-important">{{$t('pages.home.sections.description.title')}}</h2>
       <p class="flow-text center-align" v-html="$t(`pages.home.content.description.data`)">
       </p>
     </div>
+	<!--
 		<div id="news" class="section">
       <h2 class="center-align title text-important">{{$t('pht')}}</h2>
       <masonry class="row">
@@ -58,20 +60,25 @@
 				</card>
 			</masonry>
     </div>
+	-->
 	</div>
 </template>
 
 <script>
 
-import Card from '@/components/Card'
+//import Card from '@/components/Card'
 import Tile from '@/components/Tile'
 import Slider from '@/components/Slider'
-import Masonry from '@/components/Masonry'
+//import Masonry from '@/components/Masonry'
 import PageHeader from '@/sections/PageHeader'
 
 export default {
 	components: {
-		Card, Tile, Slider, Masonry, PageHeader
+		//Card, 
+		Tile, 
+		Slider, 
+		//Masonry, 
+		PageHeader
 	}
 }
 
