@@ -17,6 +17,7 @@ export const module = {
         color: 'main-color',
         sections: ['igp', 'executive', 'partner']
       },
+      /*
       passivhaus: {
         id: 'passivhaus',
         href: '/passivhaus',
@@ -24,6 +25,7 @@ export const module = {
         color: 'green',
         sections: ['description', 'designers', 'projects']
       },
+      */
       registration: {
         id: 'registration',
         href: '/registration',

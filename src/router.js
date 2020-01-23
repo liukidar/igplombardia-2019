@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from './pages/Home'
-import Passivhaus from '@/pages/Passivhaus'
+//import Passivhaus from '@/pages/Passivhaus'
 import Information from '@/pages/Information'
 import Registration from '@/pages/Registration'
 
@@ -15,11 +15,13 @@ export const router = new Router({
       name: 'Home',
       component: Home
 		},
+		/*
 		{
 			path: '/passivhaus/:target?',
       name: 'Passivhaus',
       component: Passivhaus
 		},
+		*/
 		{
 			path: '/information/:target?',
       name: 'Information',
