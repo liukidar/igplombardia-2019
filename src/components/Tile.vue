@@ -1,7 +1,7 @@
 <template>
   <div class="tile-wrap" @click="active = !active && hasDescription">
     <div class="tile" :class="[ratio, {active: active}]" :style="{background: 'url(' + bkg + ')'}">
-      <div class="information absolute-center-aligned waves-effect" v-if="hasTitle">
+      <div class="information absolute-center-aligned" v-if="hasTitle">
         <div class="padding">
           <router-link :to="to" v-if="to"><i class="material-icons teal-text text-accent-4">link</i></router-link>
         </div>
@@ -64,14 +64,14 @@ export default {
   flex-flow: column;
 }
 .information > .padding {
-  flex:1;
+  flex: 1;
   transition: .5s;
 }
 .tile.active > .information > .padding {
   flex:0;
 }
 .tile:hover > .information {
-  background: rgba(0,0,0,0.4);
+  /* background: rgba(0,0,0,0.4); */
 }
 .tile.active > .information {
   background: rgba(255,255,255,0.8);
