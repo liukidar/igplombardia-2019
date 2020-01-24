@@ -31,7 +31,7 @@ export const module = {
         href: '/registration',
         icon: 'supervisor_account',
         color: '',
-        sections: ['private', 'society']
+        sections: ['private', /* 'society' */]
       },
       blog: {
         id: 'blog',

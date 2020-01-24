@@ -85,7 +85,24 @@ export default {
 				}
 			},
 			content: {
-				/* TODO */
+				private: {
+					students: 'Studenti € 50,00',
+					sbenefits: [
+						'Iscrizione e accesso iPHA per informazioni sulla Passivhaus',
+						'Sconti iPHA su partecipazione eventi, o acquisto materiale',
+						'Partecipazione gratuita a due eventi formativi annuali IGP Lombardia (del valore di € 50,00 cadauno)',
+						'Partecipazione eventi esclusivi iscritti IGP Lombardia (networking)'
+					],
+					professionals: 'Professionisti € 120,00',
+					pbenefits: [
+						'Iscrizione ad € 100,00 per chi è già iscritto ed ha già versato quota anno precedente',
+						'Sconti iPHA su partecipazione eventi, o acquisto materiale',
+						'Partecipazione gratuita due eventi formativi annuali IGP Lombardia (del valore di € 50,00 cadauno)',
+						'Partecipazione eventi esclusivi iscritti IGP Lombardia (networking)',
+						'Partecipazione proprio progetto a evento Passive Hour (posti in base alla disponibilità)',
+						'Iscrizione elenco professionisti sito IGP Lombardia'
+					]
+				}
 			}
 		},
 		blog: {
