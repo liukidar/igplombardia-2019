@@ -33,13 +33,14 @@ export const module = {
         color: '',
         sections: ['private', /* 'society' */]
       },
+      /*
       blog: {
         id: 'blog',
         href: '/blog',
         icon: 'chat_bubble_outline',
         color: 'blue',
         sections: ['events', 'projects']
-      }
+      }*/
       /*
       admin: {
       },
