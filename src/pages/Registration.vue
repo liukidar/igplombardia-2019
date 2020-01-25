@@ -1,26 +1,31 @@
 <template>
   <div class="pg-registration">
     <div id="private" class="container section">
-      <h3 class="center-align title text-important">PRIVATI</h3>
+      <h2 class="center-align title text-important">{{$t('pages.registration.sections.private.title')}}</h2>
       <p class="flow-text">
-        Vantaggi per i soci IG Passivhaus Lombardia:
+        <b>{{$t('pages.registration.content.private.students')}}</b>
         <ul class="browser-default">
-          <li>Membership a iPHA (International Passivhaus Association) che comporta i vantaggi elencati qui</li>
-          <li>Volume “La Passivhaus</li>
-          <li>Presenza sul sito internet ufficiale dell'associazione</li>
-          <li>Download gratis di utili tools e documentazione</li>
-          <li>Essere membro di un gruppo di professionisti per scambio informazioni, formazione, team work, ecc.</li>
-          <li>Ricevere gratuitamente pubblicazioni e miniguide tematiche PH</li>
-          <li>Partecipazione gratuita ai seminari organizzati dall’Associazione</li>
-          <li>Partecipazione a prezzo scontato, ai seminari con conferimento di CFP</li>
-          <li>Partecipazione a viaggi-studio con costo agevolato</li>
+          <li>{{$t('pages.registration.content.private.sbenefits[0]')}}</li>
+          <li>{{$t('pages.registration.content.private.sbenefits[1]')}}</li>
+          <li>{{$t('pages.registration.content.private.sbenefits[2]')}}</li>
+          <li>{{$t('pages.registration.content.private.sbenefits[3]')}}</li>
         </ul>
-        <span class="black-text">Per iscriversi scaricare il Modulo di Richiesta Adesione come socio 2018<b>???</b>:</span>
+        <br>
+        <b>{{$t('pages.registration.content.private.professionals')}}</b>
+        <ul class="browser-default">
+          <li>{{$t('pages.registration.content.private.pbenefits[0]')}}</li>
+          <li>{{$t('pages.registration.content.private.pbenefits[1]')}}</li>
+          <li>{{$t('pages.registration.content.private.pbenefits[2]')}}</li>
+          <li>{{$t('pages.registration.content.private.pbenefits[3]')}}</li>
+          <li>{{$t('pages.registration.content.private.pbenefits[4]')}}</li>
+          <li>{{$t('pages.registration.content.private.pbenefits[5]')}}</li>
+        </ul>
       </p>
       <br><br>
       <a class="btn btn-large bkg-main white-text waves-effect waves-light"><i class="material-icons right">file_download</i>Download</a>
     </div>
-    <parallax height="400px" :img="require('@/assets/imgs/sample-3.jpg')"></parallax>
+    <parallax height="400px" :img="require('@/assets/imgs/slideshow-02.jpg')"></parallax>
+    <!--
     <div id="society" class="container section">
       <h3 class="center-align title text-important">AZIENDE</h3>
       <p class="flow-text">
@@ -39,6 +44,7 @@
         </ul>
       </p>
     </div>
+    -->
   </div>
 </template>
 

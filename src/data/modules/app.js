@@ -33,9 +33,10 @@ export const module = {
         href: '/registration',
         icon: 'supervisor_account',
         color: '',
-        sections: ['private', 'society'],
+        sections: ['private'],
 				visible: true
       },
+      /*
       blog: {
         id: 'blog',
         href: '/blog',
@@ -43,7 +44,7 @@ export const module = {
         color: 'blue',
         sections: ['events', 'projects'],
 				visible: true
-      },
+      },*/
       admin: {
 				id: 'admin',
         href: '/admin',
