@@ -20,9 +20,9 @@
       <div slot="description" slot-scope="layer" class='description left-align'>
         <i @click="(e) => layer.set(e, '', 'white')" class='waves-effect waves-light material-icons grey-text'>close</i>
         <div class="flow-text">
-          <div class='center-align'><b>{{data.role}}</b></div>
+          <div class='center-align'><b>{{data.name}}</b></div>
           <ul class='browser-default'>
-            <li v-for="(el, index) in data.subroles" :key="index">{{el}}</li>
+            <li v-for="(el, index) in data.roles" :key="index">{{el}}</li>
           </ul>
           <hr class='grey lighten-3'>
           <a class='color-main'><i class='material-icons'>book</i> Curriculum</a>
@@ -43,8 +43,7 @@ export default {
 				return {
 					name: 'Nome Cognome',
 					mail: 'myemail@mail.com',
-					role: 'Main role',
-					subroles: ['Role 1', 'Role 2']
+					roles: ['Role 1', 'Role 2']
 				}
 			}
 		}
