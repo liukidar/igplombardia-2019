@@ -7,7 +7,8 @@ export const module = {
       href: '',
       icon: 'home',
       color: 'main-color',
-      sections: ['description', /*'news'*/]
+			sections: ['description', /*'news'*/],
+			visible: true
     },
     pages: {
       information: {
@@ -15,7 +16,8 @@ export const module = {
         href: '/information',
         icon: 'info',
         color: 'main-color',
-        sections: ['igp', 'executive', 'partner']
+        sections: ['igp', 'executive', 'partner'],
+				visible: true
       },
       /*
       passivhaus: {
@@ -31,21 +33,21 @@ export const module = {
         href: '/registration',
         icon: 'supervisor_account',
         color: '',
-        sections: ['private', 'society']
+        sections: ['private', 'society'],
+				visible: true
       },
       blog: {
         id: 'blog',
         href: '/blog',
         icon: 'chat_bubble_outline',
         color: 'blue',
-        sections: ['events', 'projects']
-      }
-      /*
-      admin: {
+        sections: ['events', 'projects'],
+				visible: true
       },
-      article: {
+      admin: {
+				id: 'admin',
+        href: '/admin',
       }
-      */
     }
   },
   getters: {

@@ -5,6 +5,7 @@ import Home from './pages/Home'
 //import Passivhaus from '@/pages/Passivhaus'
 import Information from '@/pages/Information'
 import Registration from '@/pages/Registration'
+import Admin from '@/pages/Admin'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ export const router = new Router({
 			path: '/registration/:target?',
       name: 'Registration',
       component: Registration
+		},
+		{
+			path: '/admin/:target?',
+			name: 'Admin',
+			component: Admin
 		}
 	]
 })

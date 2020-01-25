@@ -4,7 +4,8 @@ define("F_VIEW", 'v');
 define("F_CREATE", 'c');
 define("F_EDIT", 'e');
 define("F_REMOVE", 'd');
-define("ACCESS_CODES", ['v' => F_VIEW, 'c' => F_CREATE, 'e' => F_EDIT, 'd' => F_REMOVE]);
+define("F_SU", 'su');
+define("ACCESS_CODES", ['v' => F_VIEW, 'c' => F_CREATE, 'e' => F_EDIT, 'd' => F_REMOVE, 'su' => F_SU]);
 
 function flag2access($flag) {
 	$r = [];
