@@ -5,7 +5,7 @@
         <div class="padding">
           <router-link :to="to" v-if="to"><i class="material-icons teal-text text-accent-4">link</i></router-link>
         </div>
-        <div class="title">
+        <div class="title" v-if="hasTitle">
           <div><slot name="title"></slot></div>
           <i class="material-icons right" v-if="hasDescription">more_vert</i>
         </div>
@@ -68,10 +68,10 @@ export default {
   transition: .5s;
 }
 .tile.active > .information > .padding {
-  flex:0;
+  flex: 0;
 }
 .tile:hover > .information {
-  /* background: rgba(0,0,0,0.4); */
+  background: rgba(0,0,0,0.4);
 }
 .tile.active > .information {
   background: rgba(255,255,255,0.8);
@@ -110,7 +110,7 @@ export default {
 }
 
 .title > div {
-	display: inline-block;
+        display: inline-block;
   transform: translateX(-200%);
   transition: .5s;
 }
