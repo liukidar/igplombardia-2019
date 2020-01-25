@@ -21,10 +21,12 @@ export const module = {
     }
   },
   mutations: {
-		list(state, _data) {
+		list(_state, _data) {
 			let t = new Date().getTime()
-			state.cached = t
-			state.items = _data
+			_state.cached = t
+			for (let i of _data) {
+				Vue.set(_state.items, i.id, i)
+			}
 		},
     create(_state, _data) {
 			let t = new Date().getTime()
