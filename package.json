@@ -41,7 +41,8 @@
       "M": "readonly",
       "imagesLoaded": "readonly",
       "Masonry": "readonly",
-      "$": "readonly"
+			"$": "readonly",
+			"google": "readonly"
     },
     "parserOptions": {
       "parser": "babel-eslint"
