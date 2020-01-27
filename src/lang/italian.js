@@ -36,7 +36,7 @@ export default {
 						+ '<br><br><hr class="grey lighten-3"><br>'
 						+ 'L’Associazione ha come obiettivo la divulgazione dello standard Passivhaus ed è presente sul territorio lombardo con professionisti referenti di provincia, disponibili all’organizzazione di eventi informativi e divulgativi per committenti, pubbliche amministrazioni e associazioni di categoria, direttamente sul territorio delle province lombarde.'
 						+ '<br><br><hr class="grey lighten-3"><br>'
-						+ 'Inoltre per tecnici, professionisti ed imprese organizza seminari e workshop al fine di accrescere le conoscenze e le competenze tecniche. L\'Associazione gode della membership diretta con iPHA (InternationalPassive House Association).'
+						+ 'Inoltre per tecnici, professionisti ed imprese organizza seminari e workshop al fine di accrescere le conoscenze e le competenze tecniche. L\'Associazione gode della membership diretta con iPHA (International Passive House Association).'
 				}
 			}
 		}, 
@@ -102,6 +102,14 @@ export default {
 						'Partecipazione proprio progetto a evento Passive Hour (posti in base alla disponibilità)',
 						'Iscrizione elenco professionisti sito IGP Lombardia'
 					]
+				},
+				form: {
+					explanation: 'Compila il form e ricevi una e-mail con le istruzioni per diventare socio!',
+					name: 'Nome',
+					surname: 'Cognome',
+					email: 'e-mail',
+					status: 'Studente / Professionista',
+					disclaimer: 'I dati forniti saranno utilizzati esclusivamente per comunicare le modalità d\'iscrizione.'
 				}
 			}
 		},
