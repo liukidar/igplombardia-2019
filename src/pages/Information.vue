@@ -1,5 +1,6 @@
 <template>
   <div class="pg-information">
+    <!--
     <div id="igp" class="container section">
 			<h2 class="center-align title text-important">{{$t('pht')}}</h2>
       <p class="flow-text">
@@ -16,6 +17,7 @@
       </p>
       <hr class="grey lighten-3">
     </div>
+    -->
     <div id="executive" class="container section">
       <h2 class="center-align title text-important">{{$t('pht')}}</h2>
       <p class="flow-text grey-text">Per maggiori informazioni clicca sulle immagini.</p>
@@ -26,6 +28,7 @@
       </masonry>
       <hr class="grey lighten-3">
     </div>
+    <!--
     <div id="partner">
       <div class="container">
         <h2 class="center-align title text-important">{{$t('pht')}}</h2>
@@ -35,6 +38,7 @@
         <img v-for="(el, index) in logos" :key="index" class="col logo" :src="require('../assets/logos/' + el)">
       </masonry>
     </div>
+    -->
   </div>
 </template>
 
