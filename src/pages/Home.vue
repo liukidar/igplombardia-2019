@@ -65,14 +65,12 @@ import Tile from '@/components/Tile'
 import Slider from '@/components/Slider'
 //import Masonry from '@/components/Masonry'
 import PageHeader from '@/sections/PageHeader'
-//import GoogleMap from '@/components/Map'
 
 export default {
 	components: {
 		//Card, 
 		Tile, 
 		Slider,
-		//GoogleMap,
 		//Masonry, 
 		PageHeader
 	}
