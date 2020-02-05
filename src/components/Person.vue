@@ -4,14 +4,13 @@
       <div slot-scope="layer" @click="(e) => layer.set(e, 'description', 'white')" class="waves-effect center-align">
         <div class="person">
           <br>
-          <div>
-            <img :src="data.picture"/>
+          <div :style="{ 'background-image': 'url(' + data.picture + ')'}">
           </div>
         </div>
         <br>
         <p class="flow-text grey-text text-darken-3 capitalize">
           {{data.username}}
-          <small>
+          <small v-if="data.mail">
             <br>
             <a style='display:inline-block'><i class='material-icons left'>mail_outline</i>{{data.mail}}</a>
           </small>
@@ -25,7 +24,7 @@
             <li v-for="(el, index) in data.roles" :key="index">{{el}}</li>
           </ul>
           <hr class='grey lighten-3'>
-          <a class='color-main' target='_blank' :href="data.curriculum"><i class='material-icons'>book</i> Curriculum</a>
+          <a v-if="data.curriculum" class='color-main' target='_blank' :href="data.curriculum"><i class='material-icons'>book</i> Curriculum</a>
         </div>
       </div>
     </layer>
@@ -65,20 +64,9 @@ export default {
   width: auto;
   padding-top: 100%;
   position: relative;
-  border-radius: 100%;
-}
-.person > div > * {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  display: inline-block;
-  width: calc(100% - 20px);
-  height: calc(100% - 20px);
-  border-radius: 100%;
-  transition: all .5s;
+	border-radius: 100%;
+	background-size: cover;
+	background-position: center center;
 }
 
 .card {
