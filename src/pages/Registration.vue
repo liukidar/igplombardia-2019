@@ -48,10 +48,44 @@
 			<h2 class="center-align title text-important">{{$t('pages.registration.sections.registration.title')}}</h2>
 			<div class="row">
 				<p class="flow-text">
-					{{$t('pages.registration.form.explanation')}}
+					{{$t('pages.registration.content.registration.explanation')}}
 				</p>
 				<form>
-
+					<div class="row">
+						<div class="input-field col s6">
+							<i class="material-icons prefix">account_circle</i>
+							<input id="name" type="text" class="validate">
+							<label for="name">{{$t('pages.registration.content.registration.name')}}</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="surname" type="text" class="validate">
+							<label for="surname">{{$t('pages.registration.content.registration.surname')}}</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">mail</i>
+							<input id="email" type="email" class="validate">
+							<label for="email">{{$t('pages.registration.content.registration.email')}}</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<select>
+								<option disabled selected>{{$t('pages.registration.content.registration.default_status')}}</option>
+								<option v-for="el in $t('pages.registration.content.registration.status')" :key="el">{{el}}</option>
+							</select>
+							<label>Status</label>
+						</div>
+					</div>
+					<div class="row">
+						<p class="flow-text">
+							<small>{{$t('pages.registration.content.registration.disclaimer')}}</small>
+						</p>
+					</div>
+					<div class="row">
+						<a class="btn btn-large bkg-main white-text right waves-effect waves-light">INVIA <i class="material-icons right">send</i></a>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -65,6 +99,11 @@ import Parallax from '@/components/Parallax'
 export default {
 	components: {
 		Parallax
+	},
+	mounted() {
+		
+		let elems = this.$el.querySelectorAll('select')
+    M.FormSelect.init(elems, {});
 	}
 }
 </script>

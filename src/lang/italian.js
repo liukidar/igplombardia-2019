@@ -82,6 +82,9 @@ export default {
 				},
 				society: {
 					title: 'Società'
+				},
+				registration: {
+					title: 'Registrati'
 				}
 			},
 			content: {
@@ -103,12 +106,13 @@ export default {
 						'Iscrizione elenco professionisti sito IGP Lombardia'
 					]
 				},
-				form: {
+				registration: {
 					explanation: 'Compila il form e ricevi una e-mail con le istruzioni per diventare socio!',
 					name: 'Nome',
 					surname: 'Cognome',
-					email: 'e-mail',
-					status: 'Studente / Professionista',
+					email: 'E-mail',
+					default_status: 'Seleziona un opzione',
+					status: ['Studente', 'Professionista'],
 					disclaimer: 'I dati forniti saranno utilizzati esclusivamente per comunicare le modalità d\'iscrizione.'
 				}
 			}
