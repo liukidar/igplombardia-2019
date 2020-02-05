@@ -21,8 +21,7 @@
           <li>{{$t('pages.registration.content.private.pbenefits[5]')}}</li>
         </ul>
       </p>
-      <br><br>
-      <a class="btn btn-large bkg-main white-text waves-effect waves-light"><i class="material-icons right">file_download</i>Download</a>
+      <br>
     </div>
     <parallax height="400px" :img="require('@/assets/imgs/slideshow-02.jpg')"></parallax>
     <!--
@@ -45,6 +44,17 @@
       </p>
     </div>
     -->
+		<div id="registration" class="container section">
+			<h2 class="center-align title text-important">{{$t('pages.registration.sections.registration.title')}}</h2>
+			<div class="row">
+				<p class="flow-text">
+					{{$t('pages.registration.form.explanation')}}
+				</p>
+				<form>
+
+				</form>
+			</div>
+		</div>
   </div>
 </template>
 
