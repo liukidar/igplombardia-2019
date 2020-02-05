@@ -82,6 +82,24 @@
 		</div>
 		<div id="articles" class="section" v-if="user.access.su == true">
 			<h2 class="title text-important">Gestione Articoli</h2>
+			<div class="row h-flex center">
+				<div class="input-field col s12 l4">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">person</i>
+						<input type="text" id="autocomplete-input" class="autocomplete">
+						<label for="autocomplete-input">Autocomplete</label>
+					</div>
+				</div>
+				<div class="col s12 l8">
+					<div v-for="(el, index) in ['VIEW', 'CREATE', 'EDIT', 'DELETE', 'ADMIN']" :key="index" class="switch col">
+						<label>
+							<input type="checkbox">
+							<span class="lever"></span>
+							{{el}}
+						</label>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
