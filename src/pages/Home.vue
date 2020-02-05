@@ -27,33 +27,6 @@
       <p class="flow-text center-align" v-html="$t(`pages.home.content.description.data`)">
       </p>
     </div>
-		<div id="information" class="grey darken-4">
-      <div class="container center-align section">
-				<h2 class="white-text title text-important">{{$t('pages.home.sections.information.title')}}</h2>
-			</div>
-			<div class="row">
-				<google-map class="col s12 l7 no-margin" :center="{lat: 45.547823, lng: 10.220669}" :marker="{lat: 45.549923, lng: 10.223849}" style="height: 520px;"></google-map>
-				<div class="col s12 l5 no-margin grey darken-4 grey-text text-lighten-2 center-align v-flex center" style="height: 520px;">
-					<div class="v-flex center no-wrap" style="margin: 0 auto;">
-						<h4 class="text-important">CONTATTI</h4><br>
-						<div class="left-align">
-							<p>
-								<i class="left material-icons circle-halo-white">location_on</i>
-								<span class="flow-text">{{}}<br><b>{{}}</b></span>
-							</p>
-							<p>
-								<i class="left material-icons circle-halo-white">phone</i>
-								<span class="flow-text">{{}}<br><span class="slash"></span>{{}}</span>
-							</p>
-							<p>
-								<i class="left material-icons circle-halo-white">email</i>
-								<span class="flow-text">{{}}<br><span class="slash"></span>{{}}</span>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	<!--
 		<div id="news" class="section">
       <h2 class="center-align title text-important">{{$t('pht')}}</h2>
@@ -92,14 +65,12 @@ import Tile from '@/components/Tile'
 import Slider from '@/components/Slider'
 //import Masonry from '@/components/Masonry'
 import PageHeader from '@/sections/PageHeader'
-import GoogleMap from '@/components/Map'
 
 export default {
 	components: {
 		//Card, 
 		Tile, 
 		Slider,
-		GoogleMap,
 		//Masonry, 
 		PageHeader
 	}
