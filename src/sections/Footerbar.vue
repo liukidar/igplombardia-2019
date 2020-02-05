@@ -7,7 +7,7 @@
           <span class="flow-text">
             <ul>
               <li v-for="link in pages" :key="link.id">
-                <router-link :to="link.href + '/!'" class="text-important white-text highlight-oh dark">{{$t(`pages.${link.id}.title`)}}</router-link>
+                <router-link v-if="link.visible" :to="link.href + '/!'" class="text-important white-text highlight-oh dark">{{$t(`pages.${link.id}.title`)}}</router-link>
               </li>
             </ul>
           </span>

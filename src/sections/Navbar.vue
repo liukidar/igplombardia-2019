@@ -19,7 +19,7 @@
               <span class="pipe grey-text text-lighten-1"></span>
             </li>
             <li v-for="link in pages" :key="link.id">
-              <template v-if="link.id !== activePage.id && link.visible == true">
+              <template v-if="link.visible == true">
                 <router-link :to="link.href + '/!'" class="transparent left grey-text highlight-oh light uppercase">{{$t(`pages.${link.id}.title`)}}</router-link>
                 <span class="pipe grey-text text-lighten-1"></span>
               </template>

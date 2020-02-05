@@ -16,7 +16,7 @@ export const module = {
         href: '/information',
         icon: 'info',
         color: 'main-color',
-        sections: ['igp', 'executive', 'partner'],
+        sections: ['igp', 'executive', /*'partners' */],
 				visible: true
       },
       /*
@@ -47,7 +47,8 @@ export const module = {
       },*/
       admin: {
 				id: 'admin',
-        href: '/admin',
+				href: '/admin',
+				sections: ['accounts', 'articles']
       }
     }
   },
