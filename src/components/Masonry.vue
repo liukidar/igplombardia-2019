@@ -35,7 +35,10 @@ export default {
   },
   mounted: function() {
     this.masonry()
-  }
+	},
+	updated: function() {
+		this.masonry()
+	}
 }
 </script>
 
