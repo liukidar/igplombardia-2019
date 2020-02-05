@@ -20,13 +20,11 @@
       <h2 class="center-align title text-important">{{$t('pht')}}</h2>
       <p class="flow-text grey-text">Per maggiori informazioni clicca sulle immagini.</p>
       <masonry class="section row">
-				<person class="col l4 m6 s12"></person>
-        <person class="col l4 m6 s12"></person>
-        <person class="col l4 m6 s12"></person>
+				<person v-for="person in getPeople()" :key="person.id" :data="person" class="col l4 m6 s12"></person>
       </masonry>
       <hr class="grey lighten-3">
     </div>
-    <div id="partner">
+    <!-- <div id="partner">
       <div class="container">
         <h2 class="center-align title text-important">{{$t('pht')}}</h2>
         <p class="flow-text grey-text">Per maggiori informazioni clicca sui loghi.</p>
@@ -34,7 +32,7 @@
       <masonry class="section row" :fit="true">
         <img v-for="(el, index) in logos" :key="index" class="col logo" :src="require('../assets/logos/' + el)">
       </masonry>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -42,6 +40,7 @@
 import Person from '@/components/Person'
 import Masonry from '@/components/Masonry'
 import { listFiles } from '../lib/js/script'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -49,10 +48,17 @@ export default {
     Masonry
   },
   computed: {
+		...mapGetters('people', { getPeople: 'get' }),
     logos() {
       return listFiles(require.context('../assets/logos/', false))
-    }
-  }
+		},
+	},
+	methods: {
+		...mapActions('people', { listPeople: '_list'})
+	},
+	mounted() {
+		this.listPeople()
+	}
 }
 </script>
 

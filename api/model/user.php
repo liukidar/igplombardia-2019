@@ -5,18 +5,43 @@ require_once("../lib/lib.php");
 class User
 {
 	const VALIDITY_TIME = 3600;
-
+	const PICTURE_DIR = 'profile_pics/';
+	const CURRICULUM_DIR = 'profile_docs/';
 	private $VTM;
+  private $remotePath;
+	private $localPath;
 
-	public function __construct($_VTM)
+	public function __construct($_VTM, $_remoteHost, $_localHost, $_path)
 	{
 		$this->VTM = $_VTM;
+		$this->remotePath = $_remoteHost . $_path;
+    $this->localPath = $_localHost . $_path;
+	}
+
+	public function list()
+	{
+		$res = $this->VTM->get('user.list', [
+			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles'],
+			'where' => 'roles IS NOT NULL'
+		]);
+
+		$r = [];
+		while ($user = $res->next()) {
+			$user['curriculum'] = $this->remotePath . self::CURRICULUM_DIR . $user['curriculum'];
+			$user['picture'] = $this->remotePath . self::PICTURE_DIR . $user['picture'];
+			$user['roles'] = explode(';', $user['roles']);
+			$r[] = $user;
+		}
+
+		setData('users', $r);
+
+		return true;
 	}
 
 	public function requestAuthToken($_mail, $_password)
 	{
 		$res = $this->VTM->get('user.requestAuthToken', [
-			'fields' => ['id', 'mail', 'password', 'accessFlag', 'username'],
+			'fields' => ['id', 'mail', 'password', 'access', 'username'],
 			'where' => 'mail = ?',
 			'params' => [$_mail]
 		]);
@@ -29,7 +54,7 @@ class User
 				]);
 
 				setHeader(AUTH_TOKEN, $token);
-				setData('user', ['id' => $user['id'], 'mail' => $user['mail'], 'username' => $user['username']]);
+				setData('user', ['id' => $user['id'], 'mail' => $user['mail'], 'username' => $user['username'], 'access' => flag2access($user['access'])]);
 
 				return true;
 			}
@@ -61,7 +86,7 @@ class User
 		}
 
 		$res = $this->VTM->get('token.check', [
-			'fields' => ['user.accessFlag', 'validity'],
+			'fields' => ['user.access', 'validity'],
 			'where' => 'token = ? AND ip = ?',
 			'params' => [$_token, $_SERVER['REMOTE_ADDR']]
 		]);
@@ -90,7 +115,7 @@ class User
 				setHeader('Auth-Token', $_token);
 			}
 
-			$r = flag2access($_user['user.accessFlag']);
+			$r = flag2access($_user['user.access']);
 
 			return $r;
 		}

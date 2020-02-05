@@ -5,12 +5,12 @@
         <div class="person">
           <br>
           <div>
-            <img src="https://visualpharm.com/assets/217/Person%20Female-595b40b85ba036ed117da7ea.svg"/>
+            <img :src="data.picture"/>
           </div>
         </div>
         <br>
-        <p class="flow-text grey-text text-darken-3">
-          {{data.name}}
+        <p class="flow-text grey-text text-darken-3 capitalize">
+          {{data.username}}
           <small>
             <br>
             <a style='display:inline-block'><i class='material-icons left'>mail_outline</i>{{data.mail}}</a>
@@ -20,12 +20,12 @@
       <div slot="description" slot-scope="layer" class='description left-align'>
         <i @click="(e) => layer.set(e, '', 'white')" class='waves-effect waves-light material-icons grey-text'>close</i>
         <div class="flow-text">
-          <div class='center-align'><b>{{data.name}}</b></div>
-          <ul class='browser-default'>
+          <div class='center-align capitalize'><b>{{data.username}}</b></div>
+          <ul class='browser-default capitalize'>
             <li v-for="(el, index) in data.roles" :key="index">{{el}}</li>
           </ul>
           <hr class='grey lighten-3'>
-          <a class='color-main'><i class='material-icons'>book</i> Curriculum</a>
+          <a class='color-main' target='_blank' :href="data.curriculum"><i class='material-icons'>book</i> Curriculum</a>
         </div>
       </div>
     </layer>
@@ -41,7 +41,7 @@ export default {
 		data: {
 			default: function() {
 				return {
-					name: 'Nome Cognome',
+					usernname: 'Nome Cognome',
 					mail: 'myemail@mail.com',
 					roles: ['Role 1', 'Role 2']
 				}

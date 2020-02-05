@@ -1,18 +1,11 @@
 import Vue from 'vue'
 import { APIRequest } from '../api'
 
-let dbo = {
-	people: [
-		{ id: 0, username: 'Luca' },
-		{ id: 1, username: 'Eva' }
-	]
-}
-
 export const module = {
   namespaced: true,
   state: {
     items: {},
-    apiTarget: 'temp',
+    apiTarget: 'people',
 		cacheTime: 5 * 60 * 1000
   },
   getters: {
@@ -24,7 +17,7 @@ export const module = {
 		list(_state, _data) {
 			let t = new Date().getTime()
 			_state.cached = t
-			for (let i of _data) {
+			for (let i of _data.users) {
 				Vue.set(_state.items, i.id, i)
 			}
 		},
@@ -46,8 +39,9 @@ export const module = {
     _list(_ctx) {
       return APIRequest(_ctx, {
         type: 'GET',
-        action: 'list'
-      }, dbo.people)
+        action: 'list',
+				resource: {}
+      })
     }
   }
 }
