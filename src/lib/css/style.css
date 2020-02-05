@@ -234,6 +234,10 @@ a {
   text-transform: uppercase;
 }
 
+.capitalize {
+	text-transform: capitalize;
+}
+
 p {
 	margin-block-start: .3em;
 	margin-block-end: .8em;
