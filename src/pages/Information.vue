@@ -20,7 +20,7 @@
     -->
     <div id="executive" class="container section">
       <h2 class="center-align title text-important">{{$t('pages.information.sections.executive.title')}}</h2>
-      <p class="flow-text grey-text">Per maggiori informazioni clicca sulle immagini.</p>
+      <p class="center-align flow-text grey-text">Per maggiori informazioni clicca sulle immagini.</p>
       <masonry class="section row">
 				<person v-for="person in getPeople()" :key="person.id" :data="person" class="col l4 m6 s12"></person>
       </masonry>
