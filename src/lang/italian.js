@@ -19,7 +19,7 @@ export default {
 			title: 'Home',
 			sections: {
 				slider: {
-					title: 'IGP Lombardia'
+					title: 'Passivhaus Lombardia'
 				},
 				description: {
 					title: 'L\'Associazione'
@@ -107,11 +107,11 @@ export default {
 					]
 				},
 				registration: {
-					explanation: 'Compila il form e ricevi una e-mail con le istruzioni per diventare socio!',
+					explanation: 'Compila il form; sarai contattato/a con le istruzioni per diventare socio.',
 					name: 'Nome',
 					surname: 'Cognome',
 					email: 'E-mail',
-					default_status: 'Seleziona un opzione',
+					default_status: 'Seleziona un\'opzione',
 					status: ['Studente', 'Professionista'],
 					disclaimer: 'I dati forniti saranno utilizzati esclusivamente per comunicare le modalità d\'iscrizione.'
 				}
