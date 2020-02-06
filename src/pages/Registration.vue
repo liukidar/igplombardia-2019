@@ -22,6 +22,7 @@
         </ul>
       </p>
       <br>
+			<router-link to="registration" class="btn btn-large bkg-main white-text">REGISTRATI</router-link>
     </div>
     <parallax height="400px" :img="require('@/assets/imgs/slideshow-02.jpg')"></parallax>
     <!--
