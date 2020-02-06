@@ -80,4 +80,8 @@ export default {
   padding: 1rem;
 }
 
+p.flow-text {
+		text-align: center;
+}
+
 </style>
