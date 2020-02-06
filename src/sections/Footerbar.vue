@@ -2,7 +2,7 @@
   <footer class="page-footer bkg-main">
     <div class="row">
       <div class="col l6 s12 center-align">
-        <h4 class="text-important"><router-link class="white-text" to="/!">IGP</router-link></h4>
+        <h4 class="text-important"><router-link class="white-text" to="/!">IGP Lombardia</router-link></h4>
         <div>
           <span class="flow-text">
             <ul>
