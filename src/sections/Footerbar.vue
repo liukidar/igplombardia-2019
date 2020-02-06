@@ -22,11 +22,11 @@
           </p>
           <p>
             <i class="left material-icons circle-halo-white">phone</i>
-            +39 333 445 7689
+            +39 000 000 0000
           </p>
           <p>
             <i class="left material-icons circle-halo-white">email</i>
-            example.me@gmail.com
+            info@igplombardia.it
           </p>
         </div>
       </div>
@@ -36,14 +36,12 @@
             <p>
               About the company<br>
               <span class="grey-text text-lighten-2">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio laudantium ex provident, in dolores officiis tempore incidunt?</p>
+                <p>L'IG Passivhaus Lombardia è un’Associazione composta da Professionisti, Aziende, e Imprese che condividono il desiderio di diffondere informazioni inerenti il tema delle Case Passive.</p>
               </span>
             </p>
           </div>
           <p class="no-wrap">
             <i class="fa fa-facebook square-halo-white highlight-oh dark"></i>&nbsp;
-            <i class="fa fa-youtube-play square-halo-white highlight-oh dark"></i>&nbsp;
-            <i class="fa fa-twitter square-halo-white highlight-oh dark"></i>&nbsp;
             <i class="fa fa-linkedin square-halo-white highlight-oh dark"></i>
           </p>
         </div>
