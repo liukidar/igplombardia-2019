@@ -20,6 +20,10 @@
             <i class="left material-icons circle-halo-white">email</i>
             info@igplombardia.it
           </p>
+          <p>
+            <i class="left material-icons circle-halo-white">bookmark</i>
+            P.IVA: 01574330195
+          </p>
         </div>
         <div class="description container">
           <p class="no-wrap center-align">
