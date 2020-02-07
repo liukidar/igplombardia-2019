@@ -1,7 +1,7 @@
 <template>
   <div class="cmp-page-header white-text text-important">
     <div class="container">
-      <tr-slide-in class="ch-tr1">
+      <tr-slide-in class="ch-tr1 roboto-important">
         <h2 :key="0" data-index="0" data-from="-16rem, 0">{{openTitleChar}}</h2>
         <h1 :key="1" data-index="1" data-from="0, -8rem" class="no-margin">
           <slot name="title"></slot>
@@ -50,6 +50,11 @@ export default {
 </script>
 
 <style scoped>
+
+.roboto-important {
+  font-family: "Roboto";
+  font-variant: small-caps;
+}
 
 .cmp-page-header {
 	background: rgba(0,0,0,0.6);
