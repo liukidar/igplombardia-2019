@@ -14,14 +14,16 @@
 		</li>
     <ul class="collapsible collapsible-accordion">
       <li v-for="link in pages" :key="link.id">
-        <a class="collapsible-header waves-effect waves-dark">{{$t(`pages.${link.id}.title`)}}<i class="material-icons">arrow_drop_down</i></a>
-        <div class="collapsible-body">
-          <ul>
-            <li v-for="section in link.sections" :key="section">
-							<router-link :to="link.href + '/' + section" class="waves-effect waves-dark">{{$t(`pages.${link.id}.sections.${section}.title`)}}</router-link>
-						</li>
-          </ul>
-        </div>
+        <template v-if="link.visible == true">
+          <a class="collapsible-header waves-effect waves-dark">{{$t(`pages.${link.id}.title`)}}<i class="material-icons">arrow_drop_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li v-for="section in link.sections" :key="section">
+                <router-link :to="link.href + '/' + section" class="waves-effect waves-dark">{{$t(`pages.${link.id}.sections.${section}.title`)}}</router-link>
+              </li>
+            </ul>
+          </div>
+        </template>
       </li>
     </ul>
   </ul>
