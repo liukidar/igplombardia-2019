@@ -42,8 +42,8 @@
         </div>
         <div class="description container">
           <p class="no-wrap center-align">
-            <i class="fa fa-facebook square-halo-white highlight-oh dark"></i>&nbsp;
-            <i class="fa fa-linkedin square-halo-white highlight-oh dark"></i>
+            <a class="fa fa-facebook square-halo-white highlight-oh dark" href="https://www.facebook.com/igplombardia.it"><i></i></a>&nbsp;
+            <!--<i class="fa fa-linkedin square-halo-white highlight-oh dark"></i>-->
           </p>
         </div>
       </div>
