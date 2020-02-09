@@ -24,7 +24,7 @@
             <li v-for="(el, index) in data.roles" :key="index">{{el}}</li>
           </ul>
           <hr class='grey lighten-3'>
-          <a v-if="data.curriculum" class='color-main' target='_blank' :href="data.curriculum"><i class='material-icons'>book</i> Curriculum</a>
+          <!--<a v-if="data.curriculum" class='color-main' target='_blank' :href="data.curriculum"><i class='material-icons'>book</i> Curriculum</a>-->
         </div>
       </div>
     </layer>

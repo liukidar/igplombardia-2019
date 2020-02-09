@@ -10,7 +10,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    api: API('http://libricope.altervista.org/api', 'v0')
+    api: API('https://igplombardia.it/api', 'v0')
   },
   modules: {
 		app,

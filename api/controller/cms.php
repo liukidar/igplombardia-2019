@@ -4,7 +4,7 @@ require_once '../config.php';
 require_once '../model/cms.php';
 require_once '../model/user.php';
 
-header('Access-Control-Allow-Origin: http://localhost:8080');
+header('Access-Control-Allow-Origin: '.ORIGIN_SITE);
 header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: origin, content-type, accepts, X-HTTP-Method-Override');
 header('Access-Control-Allow-Credentials: true');
