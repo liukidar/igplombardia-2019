@@ -18,7 +18,7 @@
         <div class="left-align no-wrap flow-text v-flex inline space-between">
           <p>
             <i class="left material-icons circle-halo-white">email</i>
-            info@igplombardia.it
+            <a href="mailto:info@igplombardia.it" target="_blank">info@igplombardia.it</a>
           </p>
           <p>
             <i class="left material-icons circle-halo-white">bookmark</i>
