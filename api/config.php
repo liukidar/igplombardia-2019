@@ -13,4 +13,4 @@ define('HTTP_AUTH_TOKEN', 'HTTP_AUTH_TOKEN');
 define('ORIGIN_SITE', 'http://igplombardia.it');
 
 $_SERVER["DOCUMENT_ROOT"] = "/membri/libricope";
-$_PROTOCOL = "http://";
+$_PROTOCOL = "https://";
