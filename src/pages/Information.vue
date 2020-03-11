@@ -20,23 +20,21 @@
     -->
     <div id="executive" class="container section">
       <h2 class="center-align title text-important">{{$t('pages.information.sections.executive.title')}}</h2>
-      <p class="center-align flow-text grey-text">Per maggiori informazioni clicca sulle immagini.</p>
+      <p class="flow-text grey-text center-align">Per maggiori informazioni clicca sulle immagini.</p>
       <masonry class="section row" ref="masonry">
 				<person v-for="person in getPeople()" :key="person.id" :data="person" class="col l4 m6 s12"></person>
       </masonry>
       <hr class="grey lighten-3">
     </div>
-    <!--
     <div id="partner">
       <div class="container">
-        <h2 class="center-align title text-important">{{$t('pht')}}</h2>
-        <p class="flow-text grey-text">Per maggiori informazioni clicca sui loghi.</p>
+        <h2 class="center-align title text-important">{{$t('pages.information.sections.partner.title')}}</h2>
+        <p class="flow-text grey-text center-align">Per maggiori informazioni clicca sui loghi.</p>
       </div>
       <masonry class="section row" :fit="true">
         <img v-for="(el, index) in logos" :key="index" class="col logo" :src="require('../assets/logos/' + el)">
       </masonry>
     </div>
-    -->
   </div>
 </template>
 
@@ -72,7 +70,14 @@ export default {
 
 .logo {
 	display: block;
-	margin: 2rem;
+	padding: 2rem;
+  max-width: 40vw;
+}
+
+@media all and (max-width: 600px) {
+  .logo {
+    max-width: 80vw;
+  }
 }
 
 </style>
