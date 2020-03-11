@@ -19,7 +19,7 @@ export default {
 			title: 'Home',
 			sections: {
 				slider: {
-					title: 'Passivhaus Lombardia'
+					title: 'IG Passivhaus Lombardia'
 				},
 				description: {
 					title: 'L\'Associazione'
