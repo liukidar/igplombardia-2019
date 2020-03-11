@@ -10,7 +10,7 @@ define('DB_NAME', 'igplombardia');
 define('AUTH_TOKEN', 'Auth-Token');
 define('HTTP_AUTH_TOKEN', 'HTTP_AUTH_TOKEN');
 
-define('ORIGIN_SITE', 'http://igplombardia.it');
+define('ORIGIN_SITE', '*');
 
 $_SERVER["DOCUMENT_ROOT"] = "/membri/libricope";
 $_PROTOCOL = "https://";
