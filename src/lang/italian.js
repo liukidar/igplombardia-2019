@@ -107,13 +107,7 @@ export default {
 					]
 				},
 				registration: {
-					explanation: 'Compila il form; sarai contattato/a con le istruzioni per diventare socio.',
-					name: 'Nome',
-					surname: 'Cognome',
-					email: 'E-mail',
-					default_status: 'Seleziona un\'opzione',
-					status: ['Studente', 'Professionista'],
-					disclaimer: 'I dati forniti saranno utilizzati esclusivamente per comunicare le modalità d\'iscrizione.'
+					explanation: 'Inviaci una mail ad <a class="color-main" href="mailto:info@igplombardia.it" target="_blank">info@igplombardia.it</a> indicando il tuo nome e cognome in modo da poter avviare la procedura d\'iscrizione.'
 				}
 			}
 		},
