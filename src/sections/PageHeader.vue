@@ -18,7 +18,7 @@
           <slot name="description"></slot>
         </small>
       </div>
-      <router-link :to="to" :key="1" data-index="1" data-from="0, 50vh" v-if="learnMoreBtn" class="learn-more waves-effect waves-light highlight-oh">
+      <router-link :to="to" :key="1" data-index="1" data-from="0, 50vh" v-if="learnMoreBtn" class="learn-more waves-effect waves-light 	">
         LEARN MORE
       </router-link>
     </tr-slide-in>
@@ -57,7 +57,7 @@ export default {
 }
 
 .cmp-page-header {
-	background: rgba(0,0,0,0.6);
+	background: rgba(0,0,0,0.25);
 	pointer-events: none;
 	overflow: hidden;
 }
