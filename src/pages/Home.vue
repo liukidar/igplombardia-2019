@@ -17,6 +17,7 @@
 			</slider>
 			<page-header to="description" class="absolute-center-aligned v-flex center white-text text-important center-align">
 				<template slot="title">{{$t('pages.home.sections.slider.title')}}</template>
+				<template slot="subtitle">Costruire bene per il tuo benessere</template>
 				<!--<template slot="subtitle">{{$t('phst')}}</template>
 				<template slot="description">{{$t('phd')}}</template>
 				-->
