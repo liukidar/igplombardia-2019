@@ -6,7 +6,7 @@
         <h1 :key="1" data-index="1" data-from="0, -8rem" class="no-margin">
           <slot name="title"></slot>
         </h1>
-        <h4 :key="2" data-index="2" data-from="0, 16rem" class="grey-text text-lighten-1">
+        <h4 :key="2" data-index="2" data-from="0, 16rem" class="white-text">
           <slot name="subtitle"></slot>
         </h4>
         <h2 :key="3" data-index="3" data-from="16rem, 0">{{closeTitleChar}}</h2>
@@ -18,7 +18,7 @@
           <slot name="description"></slot>
         </small>
       </div>
-      <router-link :to="to" :key="1" data-index="1" data-from="0, 50vh" v-if="learnMoreBtn" class="learn-more waves-effect waves-light highlight-oh">
+      <router-link :to="to" :key="1" data-index="1" data-from="0, 50vh" v-if="learnMoreBtn" class="learn-more waves-effect waves-light 	">
         LEARN MORE
       </router-link>
     </tr-slide-in>
@@ -57,7 +57,7 @@ export default {
 }
 
 .cmp-page-header {
-	background: rgba(0,0,0,0.6);
+	background: rgba(0,0,0,0.25);
 	pointer-events: none;
 	overflow: hidden;
 }

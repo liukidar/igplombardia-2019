@@ -8,8 +8,13 @@
       <div class="nav-wrapper">
         <language-selector class="right hide-on-med-and-down"></language-selector>
         <div class="container">
-          <router-link class="left" to="/!"><i class="material-icons color-main hide-on-large-only">home</i></router-link>
-					<router-link :to="`${activePage.href}/!`" class="brand-logo color-main">{{$t(`pages.${activePage.id}.title`)}}</router-link>
+          <router-link class="hide-on-large-only" to="/!" style="padding: 6px 0;">
+						<img :src="require('@/assets/imgs/igp-wide.jpg')" style="height:44px;">
+						<!--<i class="material-icons color-main hide-on-large-only">home</i>-->
+					</router-link>
+					<router-link :to="`${activePage.href}/!`" class="hide-on-med-and-down brand-logo color-main" style="padding: 6px 0;">
+						<img :src="require('@/assets/imgs/igp-wide.jpg')" style="height:52px;">
+					</router-link>
           <ul class="btn-sidebar hide-on-large-only">
             <li><a data-target="slide-out" class="sidenav-trigger"><i class="material-icons grey-text text-lighten-1">menu</i></a></li>
           </ul>

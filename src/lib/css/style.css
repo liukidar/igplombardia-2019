@@ -76,6 +76,9 @@ ul.browser-default > li {
 .h-flex.center {
   align-items: center;
 }
+.h-flex.space-around {
+	justify-content: space-around;
+}
 
 .v-flex.inline, .h-flex.inline {
 	display: inline-flex;
