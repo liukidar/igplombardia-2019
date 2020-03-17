@@ -29,7 +29,7 @@
     <div id="partner">
       <div class="container">
         <h2 class="center-align title text-important">{{$t('pages.information.sections.partner.title')}}</h2>
-        <p class="flow-text grey-text center-align">Per maggiori informazioni clicca sui loghi.</p>
+        <!--<p class="flow-text grey-text center-align">Per maggiori informazioni clicca sui loghi.</p>-->
       </div>
       <masonry class="section row" :fit="true">
         <img v-for="(el, index) in logos" :key="index" class="col logo" :src="require('../assets/logos/' + el)">
