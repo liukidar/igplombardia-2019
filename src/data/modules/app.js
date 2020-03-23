@@ -33,7 +33,7 @@ export const module = {
         href: '/registration',
         icon: 'supervisor_account',
         color: '',
-        sections: ['private', 'registration'],
+        sections: ['private', 'artisan', 'partner', 'registration'],
 				visible: true
       },
       /*

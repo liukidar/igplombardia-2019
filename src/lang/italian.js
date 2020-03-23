@@ -83,8 +83,11 @@ export default {
 				private: {
 					title: 'Privati'
 				},
-				society: {
-					title: 'Società'
+				artisan: {
+					title: 'Artigiani'
+				},
+				partner: {
+					title: 'Partner'
 				},
 				registration: {
 					title: 'Registrati'
@@ -109,8 +112,28 @@ export default {
 						'Iscrizione elenco professionisti sito IG Passivhaus Lombardia'
 					]
 				},
+				artisan: {
+					artisans: 'Artigiani € 150,00',
+					benefits: [
+						'Iscrizione e accesso iPHA per informazioni sulla Passivhaus (in base alla disponibilità delle chiavi di accesso)',
+						'Sconti iPHA su partecipazione eventi, o acquisto materiale',
+						'Partecipazione gratuita due eventi formativi annuali IG Passivhaus Lombardia (del valore di € 50,00 cadauno)',
+						'Partecipazione scontata del 20% ad eventi e corsi IG Passivhaus Lombardia',
+						'Partecipazione eventi esclusivi iscritti IG Passivhaus Lombardia (networking)',
+						'Partecipazione proprio progetto a evento Passive Hour (posti in base alla disponibilità)',
+						'Iscrizione elenco artigiani sito IG Passivhaus Lombardia'
+					]
+				},
+				partner: {
+					partners: 'Partner - Contattaci!',
+					benefits: [
+						'Inserimento nominativo e logo nella pagina Partner sito IG Passivhaus Lombardia',
+						'Inserimento nominativo e logo su tutto il materiale pubblicitario prodotto da IG Passivhaus Lombardia',
+						'Possibilità di partecipare e presentare la propria azienda ad eventi IG Passivhaus Lombardia come sponsor tecnico',
+					]
+				},
 				registration: {
-					explanation: 'Inviaci una mail ad <a class="color-main" href="mailto:info@igplombardia.it" target="_blank">info@igplombardia.it</a> indicando il tuo nome e cognome in modo da poter avviare la procedura d\'iscrizione.'
+					explanation: 'Inviaci una mail ad <a class="color-main" href="mailto:info@igplombardia.it" target="_blank">info@igplombardia.it</a> indicando il tuo nome e cognome (o azienda) in modo da poter avviare la procedura d\'iscrizione.'
 				}
 			}
 		},
