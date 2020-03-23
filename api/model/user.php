@@ -21,8 +21,7 @@ class User
 	public function list()
 	{
 		$res = $this->VTM->get('user.list', [
-			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles'],
-			'where' => 'roles IS NOT NULL'
+			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles', 'qualifications', 'executive', 'designer', 'artisan']
 		]);
 
 		$r = [];
