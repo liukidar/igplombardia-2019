@@ -21,8 +21,8 @@
     <div id="executive" class="container section">
       <h2 class="center-align title text-important">{{$t('pages.information.sections.executive.title')}}</h2>
       <p class="flow-text grey-text center-align">Per maggiori informazioni clicca sulle immagini.</p>
-      <masonry class="section row" ref="masonry">
-				<person v-for="person in getPeople()" :key="person.id" :data="person" class="col l4 m6 s12"></person>
+      <masonry class="section row" ref="masonry_executive">
+				<person v-for="person in executive" :key="person.id" :data="getPeople(person)" class="col l4 m6 s12"></person>
       </masonry>
       <hr class="grey lighten-3">
     </div>
@@ -35,22 +35,31 @@
         <img v-for="(el, index) in logos" :key="index" class="col logo" :src="require('../assets/logos/' + el)">
       </masonry>
     </div>
+    <div id="designers" class="container section">
+      <h2 class="center-align title text-important">{{$t('pages.information.sections.designers.title')}}</h2>
+      <masonry class="section row" ref="masonry_designers">
+        <designer v-for="person in designers" :key="person.id" :data="getPeople(person)" class="col l6 s12"></designer>
+      </masonry>
+      <hr class="grey lighten-3">
+    </div>
   </div>
 </template>
 
 <script>
 import Person from '@/components/Person'
+import Designer from '@/components/Designer'
 import Masonry from '@/components/Masonry'
 import { listFiles } from '../lib/js/script'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
-		Person,
+    Person,
+    Designer,
     Masonry
   },
   computed: {
-		...mapGetters('people', { getPeople: 'get' }),
+		...mapGetters('people', { getPeople: 'get', executive: 'get_executive', designers: 'get_designers' }),
     logos() {
       return listFiles(require.context('../assets/logos/', false))
 		},
@@ -60,7 +69,8 @@ export default {
 	},
 	created() {
 		this.listPeople().then(() => {
-			this.$refs['masonry'].masonry()
+			this.$refs['masonry_executive'].masonry()
+			this.$refs['masonry_designers'].masonry()
 		})
 	}
 }

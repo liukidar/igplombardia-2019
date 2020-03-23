@@ -10,10 +10,10 @@
         <br>
         <p class="flow-text grey-text text-darken-3 capitalize">
           {{data.username}}
-          <small v-if="data.mail">
+          <!--<small v-if="data.mail">
             <br>
             <a style='display:inline-block'><i class='material-icons left'>mail_outline</i>{{data.mail}}</a>
-          </small>
+          </small>-->
         </p>
       </div>
       <div slot="description" slot-scope="layer" class='description left-align'>
@@ -24,6 +24,9 @@
             <li v-for="(el, index) in data.roles" :key="index">{{el}}</li>
           </ul>
           <hr class='grey lighten-3'>
+          <ul class='browser-default capitalize'>
+            <li v-for="(el, index) in data.qualifications" :key="index">{{el}}</li>
+          </ul>
           <!--<a v-if="data.curriculum" class='color-main' target='_blank' :href="data.curriculum"><i class='material-icons'>book</i> Curriculum</a>-->
         </div>
       </div>
