@@ -29,6 +29,7 @@ class User
 			$user['curriculum'] = $this->remotePath . self::CURRICULUM_DIR . $user['curriculum'];
 			$user['picture'] = $this->remotePath . self::PICTURE_DIR . $user['picture'];
 			$user['roles'] = explode(';', $user['roles']);
+			$user['qualifications'] = explode(';', $user['qualifications']);
 			$r[] = $user;
 		}
 
