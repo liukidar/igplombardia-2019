@@ -17,7 +17,10 @@ export const module = {
     },
     get_designers(_state) {
       return Object.keys(_state.items).filter((el) => _state.items[el].designer == 1).sort((a, b) => _state.items[a].username.split(' ')[1] > _state.items[b].username.split(' ')[1] ? 1 : -1)
-    }
+    },
+    get_artisans(_state) {
+      return Object.keys(_state.items).filter((el) => _state.items[el].artisan == 1)
+    },
   },
   mutations: {
 		list(_state, _data) {

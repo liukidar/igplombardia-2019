@@ -3,7 +3,7 @@
     <div class="cmp-body left-align flow-text">
       <div class="cmp-name capitalize">
         <b>{{data.username}} </b>
-        <i v-for="(q, index) in data.qualifications" :key="index">- {{q}}</i>
+        <i v-for="(q, index) in data.qualifications" :key="index"><span v-if="q">- {{q}}</span></i>
       </div>
       <div style="padding: 8px;">
         <div v-if="data.mail"><i class="material-icons inline middle color-main">email</i> {{data.mail}}</div>
@@ -15,7 +15,11 @@
 
 <script>
 export default {
-  props: ['data']
+  props: ['data'],
+  mounted() {
+    // eslint-disable-next-line
+    console.log(this.data.qualifications)
+  }
 }
 </script>
 

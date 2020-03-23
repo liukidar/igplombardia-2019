@@ -26,6 +26,20 @@
       </masonry>
       <hr class="grey lighten-3">
     </div>
+    <div id="designers" class="container section">
+      <h2 class="center-align title text-important">{{$t('pages.information.sections.designers.title')}}</h2>
+      <masonry class="section row" ref="masonry_designers">
+        <designer v-for="person in designers" :key="person.id" :data="getPeople(person)" class="col l6 s12"></designer>
+      </masonry>
+      <hr class="grey lighten-3">
+    </div>
+    <div id="artisans" class="container section">
+      <h2 class="center-align title text-important">{{$t('pages.information.sections.artisans.title')}}</h2>
+      <masonry class="section row" ref="masonry_artisans">
+        <designer v-for="person in artisans" :key="person.id" :data="getPeople(person)" class="col l6 s12"></designer>
+      </masonry>
+      <hr class="grey lighten-3">
+    </div>
     <div id="partner">
       <div class="container">
         <h2 class="center-align title text-important">{{$t('pages.information.sections.partner.title')}}</h2>
@@ -34,13 +48,6 @@
       <masonry class="section row" :fit="true">
         <img v-for="(el, index) in logos" :key="index" class="col logo" :src="require('../assets/logos/' + el)">
       </masonry>
-    </div>
-    <div id="designers" class="container section">
-      <h2 class="center-align title text-important">{{$t('pages.information.sections.designers.title')}}</h2>
-      <masonry class="section row" ref="masonry_designers">
-        <designer v-for="person in designers" :key="person.id" :data="getPeople(person)" class="col l6 s12"></designer>
-      </masonry>
-      <hr class="grey lighten-3">
     </div>
   </div>
 </template>
@@ -59,7 +66,7 @@ export default {
     Masonry
   },
   computed: {
-		...mapGetters('people', { getPeople: 'get', executive: 'get_executive', designers: 'get_designers' }),
+		...mapGetters('people', { getPeople: 'get', executive: 'get_executive', designers: 'get_designers', artisans: 'get_artisans' }),
     logos() {
       return listFiles(require.context('../assets/logos/', false))
 		},
@@ -71,6 +78,7 @@ export default {
 		this.listPeople().then(() => {
 			this.$refs['masonry_executive'].masonry()
 			this.$refs['masonry_designers'].masonry()
+			this.$refs['masonry_artisans'].masonry()
 		})
 	}
 }
