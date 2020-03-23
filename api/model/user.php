@@ -21,7 +21,7 @@ class User
 	public function list()
 	{
 		$res = $this->VTM->get('user.list', [
-			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles', 'qualifications', 'executive', 'designer', 'artisan']
+			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles', 'qualifications', 'executive', 'designer', 'artisan', 'location']
 		]);
 
 		$r = [];
@@ -29,6 +29,7 @@ class User
 			$user['curriculum'] = $this->remotePath . self::CURRICULUM_DIR . $user['curriculum'];
 			$user['picture'] = $this->remotePath . self::PICTURE_DIR . $user['picture'];
 			$user['roles'] = explode(';', $user['roles']);
+			$user['qualifications'] = explode(';', $user['qualifications']);
 			$r[] = $user;
 		}
 
