@@ -27,6 +27,8 @@
       <h2 class="center-align title text-important">{{$t('pages.home.sections.description.title')}}</h2>
       <p class="flow-text center-align" v-html="$t(`pages.home.content.description.data`)">
       </p>
+      <br />
+      <div class="center-align"><logo type="ipaw" width="256px" /></div>
     </div>
 	<!--
 		<div id="news" class="section">
@@ -66,6 +68,7 @@ import Tile from '@/components/Tile'
 import Slider from '@/components/Slider'
 //import Masonry from '@/components/Masonry'
 import PageHeader from '@/sections/PageHeader'
+import Logo from '@/components/Logo'
 
 export default {
 	components: {
@@ -73,7 +76,8 @@ export default {
 		Tile, 
 		Slider,
 		//Masonry, 
-		PageHeader
+    PageHeader,
+    Logo
 	}
 }
 

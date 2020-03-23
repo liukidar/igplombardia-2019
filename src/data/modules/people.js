@@ -11,6 +11,12 @@ export const module = {
   getters: {
     get(_state) {
       return (_id) => _id ? (_state.items[_id] ? _state.items[_id] : {}) : _state.items
+    },
+    get_executive(_state) {
+      return Object.keys(_state.items).filter((el) => _state.items[el].executive == 1)
+    },
+    get_designers(_state) {
+      return Object.keys(_state.items).filter((el) => _state.items[el].designer == 1).sort((a, b) => _state.items[a].username.split(' ')[1] > _state.items[b].username.split(' ')[1] ? 1 : -1)
     }
   },
   mutations: {

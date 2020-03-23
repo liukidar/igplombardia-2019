@@ -51,6 +51,9 @@ export default {
 				},
 				partner: {
 					title: 'Partners'
+				},
+				designers: {
+					title: 'Progettisti'
 				}
 			},
 			content: {
@@ -65,9 +68,6 @@ export default {
 				},
 				projects: {
 					title: 'Progetti'
-				},
-				designers: {
-					title: 'Progettisti'
 				}
 			},
 			content: {
