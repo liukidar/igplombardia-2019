@@ -54,6 +54,9 @@ export default {
 				},
 				designers: {
 					title: 'Progettisti'
+				},
+				artisans: {
+					title: 'Artigiani'
 				}
 			},
 			content: {

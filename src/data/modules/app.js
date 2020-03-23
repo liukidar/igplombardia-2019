@@ -16,7 +16,7 @@ export const module = {
         href: '/information',
         icon: 'info',
         color: 'main-color',
-        sections: [/*'igp',*/ 'executive', 'partner', 'designers'],
+        sections: [/*'igp',*/ 'executive', 'designers', 'artisans', 'partner'],
 				visible: true
       },
       /*
