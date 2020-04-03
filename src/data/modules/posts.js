@@ -5,22 +5,13 @@ export const module = {
   namespaced: true,
   state: {
     items: {},
-    apiTarget: 'people',
+    apiTarget: 'post',
 		cacheTime: 5 * 60 * 1000
   },
   getters: {
     get(_state) {
       return (_id) => _id ? (_state.items[_id] ? _state.items[_id] : {}) : _state.items
-    },
-    get_executive(_state) {
-      return Object.keys(_state.items).filter((el) => _state.items[el].executive == 1)
-    },
-    get_designers(_state) {
-      return Object.keys(_state.items).filter((el) => _state.items[el].designer == 1).sort((a, b) => _state.items[a].username.split(' ')[1] > _state.items[b].username.split(' ')[1] ? 1 : -1)
-    },
-    get_artisans(_state) {
-      return Object.keys(_state.items).filter((el) => _state.items[el].artisan == 1)
-    },
+    }
   },
   mutations: {
 		list(_state, _data) {
@@ -28,7 +19,9 @@ export const module = {
 			_state.cached = t
 			for (let i of _data.items) {
 				Vue.set(_state.items, i.id, i)
-			}
+      }
+      // eslint-disable-next-line
+      console.log(_state.items)
 		},
     create(_state, _data) {
 			let t = new Date().getTime()

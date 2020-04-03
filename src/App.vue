@@ -1,5 +1,5 @@
 <template>
-  <div id="!">
+  <div id="!" class="app">
     <navbar></navbar>
     <main id="body">
       <router-view/>
@@ -18,7 +18,6 @@ import ScrollUpArrow from './components/ScrollUpArrow'
 import { scrollTo } from './lib/js/script'
 
 export default {
-  name: 'app',
   methods: {
     materialize() {
       let elems = document.querySelectorAll('.modal')
@@ -74,7 +73,7 @@ html {
   font-size: 12px;
 }
 
-#app {
+.app {
   display: flex;
   min-height: 100vh;
   flex-direction: column;

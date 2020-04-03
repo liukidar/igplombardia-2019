@@ -8,7 +8,7 @@ class User
 	const PICTURE_DIR = 'profile_pics/';
 	const CURRICULUM_DIR = 'profile_docs/';
 	private $VTM;
-  private $remotePath;
+  	private $remotePath;
 	private $localPath;
 
 	public function __construct($_VTM, $_remoteHost, $_localHost, $_path)
@@ -33,7 +33,7 @@ class User
 			$r[] = $user;
 		}
 
-		setData('users', $r);
+		setData('items', $r);
 
 		return true;
 	}

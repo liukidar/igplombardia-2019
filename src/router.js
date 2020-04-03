@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Information from '@/pages/Information'
 import Registration from '@/pages/Registration'
 import Admin from '@/pages/Admin'
+import Blog from '@/pages/Blog'
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ export const router = new Router({
 			path: '/admin/:target?',
 			name: 'Admin',
 			component: Admin
+		},
+		{
+			path: '/blog/:target?',
+			name: 'Blog',
+			component: Blog
 		}
 	]
 })

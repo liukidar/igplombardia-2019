@@ -36,15 +36,14 @@ export const module = {
         sections: ['private', 'artisan', 'partner', 'registration'],
 				visible: true
       },
-      /*
       blog: {
         id: 'blog',
         href: '/blog',
         icon: 'chat_bubble_outline',
         color: 'blue',
-        sections: ['events', 'projects'],
+        sections: [/*'events',*/ 'projects'],
 				visible: true
-      },*/
+      },
       admin: {
 				id: 'admin',
 				href: '/admin',
