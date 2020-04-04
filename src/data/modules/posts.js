@@ -20,8 +20,6 @@ export const module = {
 			for (let i of _data.items) {
 				Vue.set(_state.items, i.id, i)
       }
-      // eslint-disable-next-line
-      console.log(_state.items)
 		},
     create(_state, _data) {
 			let t = new Date().getTime()

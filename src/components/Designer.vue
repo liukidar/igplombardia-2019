@@ -18,7 +18,7 @@ export default {
   props: ['data'],
   mounted() {
     // eslint-disable-next-line
-    console.log(this.data.qualifications)
+    //console.log(this.data.qualifications)
   }
 }
 </script>

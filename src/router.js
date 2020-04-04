@@ -17,13 +17,11 @@ export const router = new Router({
       name: 'Home',
       component: Home
 		},
-		/*
-		{
+		/*{
 			path: '/passivhaus/:target?',
       name: 'Passivhaus',
       component: Passivhaus
-		},
-		*/
+		},*/
 		{
 			path: '/information/:target?',
       name: 'Information',

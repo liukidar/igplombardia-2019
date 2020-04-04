@@ -41,13 +41,13 @@ export const module = {
         href: '/blog',
         icon: 'chat_bubble_outline',
         color: 'blue',
-        sections: [/*'events',*/ 'projects'],
+        sections: ['projects'],
 				visible: true
       },
       admin: {
 				id: 'admin',
 				href: '/admin',
-				sections: ['accounts', 'articles']
+				sections: ['users', 'posts']
       }
     }
   },

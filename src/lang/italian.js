@@ -39,7 +39,7 @@ export default {
 						+ 'Inoltre per tecnici, professionisti ed imprese organizza seminari e workshop al fine di accrescere le conoscenze e le competenze tecniche. L\'Associazione gode della membership diretta con iPHA (International Passive House Association).'
 				}
 			}
-		}, 
+		},
 		information: {
 			title: 'Chi Siamo',
 			sections: {
@@ -75,7 +75,7 @@ export default {
 			},
 			content: {
 				/* TODO */
-			}	
+			}
 		},
 		registration: {
 			title: 'Diventa Socio',
@@ -149,6 +149,17 @@ export default {
 			},
 			content: {
 				/* TODO */
+			}
+		},
+		admin: {
+			title: 'Admin',
+			sections: {
+				users: { 
+					title: 'Gestione User' 
+				},
+				posts: {
+					title: 'Gestione Post'
+				}
 			}
 		}
 	},
