@@ -12,5 +12,5 @@ define('HTTP_AUTH_TOKEN', 'HTTP_AUTH_TOKEN');
 
 define('ORIGIN_SITE', '*');
 
-$_SERVER["DOCUMENT_ROOT"] = "/membri/libricope";
+//$_SERVER["DOCUMENT_ROOT"] = "\\httpdocs";
 $_PROTOCOL = "https://";

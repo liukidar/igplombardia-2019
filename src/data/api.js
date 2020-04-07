@@ -14,6 +14,7 @@ export function APIRequest(_ctx, _data, _dbo) {
 	return new Promise((resolve, reject) => {
 		let t = _ctx.state.cacheTime ? _ctx.state.cacheTime : (60 * 1000)
 		if (!cached(_ctx, _data, t)) {
+      if (_data.body) _data.body.action = _data.action
 			_ctx.rootState.api.request(_data.type, _ctx.state.apiTarget, _data.resource, _data.body).then((r) => {
 				if (r.status) {
 					if (_dbo) {
@@ -48,15 +49,15 @@ function objectToFormData(obj) {
 				appendFormData(data[i], root + '[' + i + ']');
 			}
 		} else if (typeof data === 'object' && data) {
-			for (let key in data) {
-				if (data.hasOwnProperty(key)) {
-					if (root === '') {
-						appendFormData(data[key], key);
-					} else {
-						appendFormData(data[key], root + '.' + key);
-					}
-				}
-			}
+      if (root === '') {
+        for (let key in data) {
+          if (data.hasOwnProperty(key)) {
+            appendFormData(data[key], key);
+          }
+        }
+      } else {
+        formData.append(root, JSON.stringify(data));
+      }
 		} else {
 			if (data !== null && typeof data !== 'undefined') {
 				formData.append(root, data);

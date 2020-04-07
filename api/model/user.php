@@ -17,12 +17,36 @@ function random_str(
 	return $str;
 }
 
+function flag2dict($_string, $_flags, $_sep = '-') {
+  $r = array_fill_keys($_flags, false);
+  if (strlen($_string)) {
+    foreach (explode($_sep, $_string) as $flag) {
+      $r[$flag] = true;
+    }
+  }
+
+  return $r;
+}
+
+function dict2Flag($_dict, $_flags, $_sep = '-') {
+  $r = [];
+  foreach ($_flags as $flag) {
+    if ($_dict[$flag] == true) {
+      $r[] = $flag;
+    }
+  }
+
+  return count($r) ? join($_sep, $r) : '';
+}
+
 class User
 {
 	const VALIDITY_TIME = 3600;
 	const PICTURE_DIR = 'profile_pics/';
 	const CURRICULUM_DIR = 'profile_docs/';
-	const ALLOWED_TYPES = ['image/png', 'image/jpg', 'image/jpeg'];
+  const ALLOWED_TYPES = ['image/png', 'image/jpg', 'image/jpeg'];
+  const USER_TYPES = ['a', 'e', 'd'];
+  const USER_FLAGS = ['v', 'c', 'e', 'd', 'su'];
 	private $VTM;
   private $remotePath;
 	private $localPath;
@@ -32,21 +56,52 @@ class User
 		$this->VTM = $_VTM;
 		$this->remotePath = $_remoteHost . $_path;
     $this->localPath = $_localHost . $_path;
-	}
+  }
+  
+  public function row2el(&$_row) {
+    $_row['curriculum'] = $_row['curriculum'] ? $this->remotePath . self::CURRICULUM_DIR . $_row['curriculum'] : null;
+    $_row['picture'] = $_row['picture'] ? $this->remotePath . self::PICTURE_DIR . $_row['picture'] : null;
+    $_row['types'] = flag2dict($_row['types'], self::USER_TYPES);
+    $_row['access'] = flag2dict($_row['access'], self::USER_FLAGS);
+    $_row['roles'] = $_row['roles'] ? explode(';', $_row['roles']) : null;
+    $_row['qualifications'] = $_row['qualifications'] ? explode(';', $_row['qualifications']) : null;
+
+    return $_row;
+  }
+
+  public function el2row($_el, $_fields) {
+    $row = [];
+
+    foreach ($_fields as $field) {
+      $row[$field] = $_el[$field];
+    }
+
+    if ($row['roles']) {
+      $row['roles'] = implode(';', $row['roles']);
+    }
+    if ($row['qualifications']) {
+      $row['qualifications'] = implode(';', $row['qualifications']);
+    }
+    if ($row['types']) {
+      $row['types'] = dict2Flag($row['types'], self::USER_TYPES);
+    }
+    if ($row['access']) {
+      $row['access'] = dict2Flag($row['access'], self::USER_FLAGS);
+    }
+
+    return $row;
+  }
 
 	public function list()
 	{
+    // Access flag is public, don't think it really matters here.
 		$res = $this->VTM->get('user.list', [
-			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles', 'qualifications', 'executive', 'designer', 'artisan', 'location']
+			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles', 'qualifications', 'types', 'executive', 'designer', 'artisan', 'location', 'access']
 		]);
 
 		$r = [];
-		while ($user = $res->next()) {
-			$user['curriculum'] = $user['curriculum'] ? $this->remotePath . self::CURRICULUM_DIR . $user['curriculum']: null;
-			$user['picture'] = $user['picture'] ? $this->remotePath . self::PICTURE_DIR . $user['picture'] : null;
-			$user['roles'] = $user['roles'] ? explode(';', $user['roles']) : [];
-			$user['qualifications'] = $user['qualifications'] ? explode(';', $user['qualifications']) : [];
-			$r[] = $user;
+		while ($row = $res->next()) {
+      $r[] = $this->row2el($row);
 		}
 
 		setData('items', $r);
@@ -54,21 +109,73 @@ class User
 		return true;
 	}
 
-	public function create($_username, $_mail, $_roles, $_qualifications, $_location, $_files, $_types, $_access)
+	public function create($_el, $_picture)
   {
-		if (in_array($_files['type'][$i], self::ALLOWED_TYPES)) {
-			if (move_uploaded_file($_files['tmp_name'][0], $this->localPath . $_files['name'][0])) {
-				$password = random_str(6);
-				$password_hash = password_hash($password, PASSWORD_DEFAULT);
-				if ($this->VTM->post('user.create', [
-					'fields' => ['password' => $password_hash, 'mail' => $_mail, 'username' => $_username, 'curriculum' => '', 'roles' => implode(';', $_roles), 'qualifications' => implode(';', $_qualifications),
-						'executive' => $_types['executive'], 'designer' => $_types['designer'], 'artisan' => $_types['artisan'], 'location' => $_location, 'access' => implode('-', $_access)]
-				])) {
-					setData('item', ['id' => $this->VTM->last_inserted_id()]);
-				}
-			}
-		}
-	}
+    $row = $this->el2row($_el, ['mail', 'username', 'curriculum', 'roles', 'qualifications', 'types', 'location', 'access', 'picture']);
+
+		if ($_picture && in_array($_picture['type'], self::ALLOWED_TYPES)) {
+      $r = move_uploaded_file($_picture['tmp_name'], $this->localPath . self::PICTURE_DIR . $_picture['name']);
+      if ($r == false) {
+        return false;
+      } else {
+        $_el['picture'] = $this->remotePath . self::PICTURE_DIR . $_el['picture'];
+      }
+    }
+    if ($this->VTM->post('user.create', [
+      'fields' => $row
+    ])) {
+      $_el['id'] = $this->VTM->last_inserted_id();
+      setData('items', [$_el]);
+
+      return true;
+    }
+
+    return false;
+  }
+  
+  public function edit($_el, $_picture)
+  {
+    $row = $this->el2row($_el, ['mail', 'username', 'roles', 'qualifications', 'types', 'location', 'access', 'picture']);
+
+    if ($_picture && in_array($_picture['type'], self::ALLOWED_TYPES)) {
+      $r = $this->VTM->get('user.person', ['fields' => ['picture'], 'where' => 'id = ?', 'params' => [$_el['id']]]);
+      $previous_picture = $r->next()['picture'];
+      if ($previous_picture) {
+        unlink($this->localPath.self::PICTURE_DIR.$previous_picture);
+      }
+      $r = move_uploaded_file($_picture['tmp_name'], $this->localPath . self::PICTURE_DIR . $_picture['name']);
+      if ($r == false) {
+        return false;
+      } else {
+        $_el['picture'] = $this->remotePath . self::PICTURE_DIR . $_el['picture'];
+      }
+    }
+
+    $r = $this->VTM->put('user.edit', [
+      'fields' => $row,
+      'where' => 'id = ?',
+      'params' => [$_el['id']]
+    ]);
+
+    setData('item', $_el);
+
+    return true;
+  }
+
+  public function remove($_id)
+  {
+    $r = $this->VTM->delete('user.delete', [
+      'where' => 'id = ?',
+      'params' => [$_id]
+    ]);
+    if ($r == false) {
+      return false;
+    }
+
+    setData('id', $_id);
+
+    return true;
+  }
 
 	public function requestAuthToken($_mail, $_password)
 	{

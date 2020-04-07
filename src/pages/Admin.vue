@@ -5,40 +5,19 @@
       <div class="row h-flex center">
         <div class="input-field col s12 l4">
           <i class="material-icons prefix">person</i>
-          <input @change="selectUser" type="text" id="username-autocomplete" class="username-autocomplete" />
+          <input @change="selectPerson" ref="userAutocomplete" type="text" id="username-autocomplete" class="username-autocomplete" />
           <label for="username-autocomplete">Search</label>
         </div>
         <div class="col s12 l8">
           <div
-            v-for="(el, index) in ['VIEW', 'CREATE', 'EDIT', 'DELETE', 'ADMIN']"
-            :key="index"
+            v-for="(el, k) in access"
+            :key="k"
             class="switch col"
           >
-            <label>
-              <input type="checkbox" />
+            <label class="uppercase">
+              <input type="checkbox" v-model="selectedUser.access[el]"/>
               <span class="lever"></span>
-              {{el}}
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12 l6">
-          <div class="chips chips-role"></div>
-        </div>
-        <div class="col s12 l6">
-          <div class="chips chips-qualification"></div>
-        </div>
-        <div class="col s12 l12">
-          <div
-            v-for="(el, index) in ['designer', 'artisan', 'executive']"
-            :key="index"
-            class="switch col"
-          >
-            <label>
-              <input :id="el" type="checkbox" :value="el" v-model="selectedUser[el]"/>
-              <span class="lever"></span>
-              {{el}}
+              {{k}}
             </label>
           </div>
         </div>
@@ -59,13 +38,34 @@
             <div class="file-field input-field">
               <div class="btn bkg-main">
                 <span>Picture</span>
-                <input type="file" />
+                <input ref="userPicture" @change="(e) => { userPicture = e.target.files[0]; }" type="file" />
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" />
+                <input ref="userPictureWrapper" class="file-path validate" type="text" />
               </div>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 l6">
+          <chips :value.sync="selectedUser.roles" placeholder="Roles" />
+        </div>
+        <div class="col s12 l6">
+          <chips :value.sync="selectedUser.qualifications" placeholder="Qualifications" />
+        </div>
+        <div class="col s12 l12">
+          <div
+            v-for="(el, k) in types"
+            :key="k"
+            class="switch col"
+          >
+            <label class="capitalize">
+              <input type="checkbox" v-model="selectedUser.types[el]"/>
+              <span class="lever"></span>
+              <big>{{k}}</big>
+            </label>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -76,13 +76,13 @@
         </div>
         <div class="col s12 l6">
           <div class="col">
-            <button class="btn btn-large bkg-main">NEW</button>
+            <button @click="createPerson" class="btn btn-large bkg-main">NEW</button>
           </div>
           <div class="col">
-            <button class="btn btn-large bkg-main">EDIT</button>
+            <button @click="editPerson" class="btn btn-large bkg-main">EDIT</button>
           </div>
           <div class="col">
-            <button class="btn btn-large bkg-main">DELETE</button>
+            <button @click="removePerson" class="btn btn-large bkg-main">DELETE</button>
           </div>
         </div>
       </div>
@@ -144,29 +144,23 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
 
-// import { mapGetters, mapActions } from 'vuex'
+import Chips from '@/components/materialize/Chips'
+import { mapState, mapGetters, mapActions } from "vuex"
 
 export default {
   data: function() {
     return {
-      selectedUser: {
-        username: '',
-        mail: '',
-        roles: [],
-        qualifications: [],
-        designer: false,
-        artisan: false,
-        execution: false,
-        location: ''
-      },
+      userAutocomplete: null,
+      selectedUser: this.newUser(),
+      userPicture: null,
       selectedPost: {
 
       },
     }
   },
   computed: {
+    ...mapState("people", ['types', 'access']),
     ...mapGetters("user", { _user: "get" }),
     ...mapGetters("people", { getPeople: "get" }),
     ...mapGetters("posts", { getPosts: "get" }),
@@ -175,43 +169,98 @@ export default {
     }
   },
   methods: {
-    ...mapActions("people", { listPeople: "_list" }),
+    ...mapActions("people", { listPeople: "_list", _createPerson: '_create', _editPerson: '_edit', _removePerson: '_remove' }),
     ...mapActions("posts", { listPosts: "_list" }),
+    newUser() {
+      if (this.$refs.userAutocomplete) this.$refs.userAutocomplete.value = null
+
+      return {
+        username: '',
+        mail: '',
+        roles: [],
+        qualifications: [],
+        types: {},
+        location: '',
+        access: {},
+        picture: '',
+        curriculum: ''
+      }
+    },
+    updateUserAutocomplete() {
+      let data = {}
+      for (let user of Object.values(this.getPeople())) {
+        data[user.id + '. ' + user.username] = user.picture || null
+      }
+      for (let autocomplete of this.userAutocomplete) {
+        autocomplete.updateData(data)
+      }
+    },
     selectPost(e) {
+      // TODO fix
       let p = this.getPosts(e.target.value.substr(0, e.target.value.indexOf('.')))
       if (p) {
         for (let k in this.selectedPost) {
           this.selectedPost[k] = p[k]
         }
+        this.$nextTick(M.updateTextFields)
       }
     },
-    selectUser(e) {
+    selectPerson(e) {
       let is_id = e.target.value.indexOf('.')
       if (is_id != -1) {
         let u = this.getPeople(e.target.value.substr(0, is_id))
         if (u) {
-          this.selectedUser.username = u.username
-          this.selectedUser.mail = u.mail
-          this.selectedUser.executive = u.executive
-          this.selectedUser.designer = u.designer
-          this.selectedUser.artisan = u.artisan
-          this.selectedUser.location = u.location
-
-          M.Chips.init(this.selectedUser.qualifications, { data: u.qualifications.length ? u.qualifications.map(el => ({ tag: el })) : []})
-          M.Chips.init(this.selectedUser.roles, { data: u.roles.length ? u.roles.map(el => ({ tag: el })) : []})
+          this.selectedUser = Object.assign({}, u);
+        } else {
+          this.selectedUser = this.newUser()
         }
+        this.$nextTick(M.updateTextFields)
+      }
+    },
+    createPerson() {
+      if (this.selectedUser.username) {
+        let picture = null;
+        if (this.$refs.userPicture.files.length == 1) {
+          picture = this.$refs.userPicture.files[0]
+          this.selectedUser.picture = picture.name
+          this.$refs.userPicture.value = null
+          this.$refs.userPictureWrapper.value = null
+        } else {
+          this.selectedUser.picture = null
+        }
+        this._createPerson({ user: this.selectedUser, picture }).then(() => {
+          this.updateUserAutocomplete()
+        })
+        this.selectedUser = this.newUser()
+      }
+    },
+    editPerson() {
+      if (this.selectedUser.id) {
+        let picture = null
+        if (this.$refs.userPicture.files.length == 1) {
+          picture = this.$refs.userPicture.files[0]
+          this.selectedUser.picture = picture.name
+          this.$refs.userPicture.value = null
+          this.$refs.userPictureWrapper.value = null
+        }
+        this._editPerson({ user: this.selectedUser, picture }).then(() => {
+          this.updateUserAutocomplete()
+        })
+      }
+    },
+    removePerson() {
+      if (this.selectedUser.id) {
+        this._removePerson({ id: this.selectedUser.id }).then(() => {
+          this.updateUserAutocomplete()
+        })
+        this.selectedUser = this.newUser()
       }
     }
   },
   mounted() {
+    this.userAutocomplete = M.Autocomplete.init(this.$el.querySelectorAll(".username-autocomplete"), { onAutocomplete: () => { this.userPicture = null } })
     this.listPeople().then(() => {
-      let data = {}
-      let autocomplete = this.$el.querySelectorAll(".username-autocomplete")
-      
-      for (let user of Object.values(this.getPeople())) {
-        data[user.id + '. ' + user.username] = user.picture || null
-      }
-      M.Autocomplete.init(autocomplete, { data })
+      this.updateUserAutocomplete()
     })
     
     this.listPosts().then(() => {
@@ -221,7 +270,7 @@ export default {
       for (let post of Object.values(this.getPosts())) {
         data[post.title] = null
       }
-      M.Autocomplete.init(autocomplete, { data})
+      M.Autocomplete.init(autocomplete, { data })
     })
 
     let elems = this.$el.querySelectorAll("select")
@@ -233,6 +282,9 @@ export default {
     /* if (!this.user || this.user.access.v == false) {
       this.$router.push('/!')
     } */
+  },
+  components: {
+    Chips
   }
 }
 </script>

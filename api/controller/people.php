@@ -23,11 +23,37 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	case 'GET':
 		$user->list();
 
-		break;
+    break;
+  case 'POST':
+    switch ($_POST['action']) {
+      case 'create':
+        $user->create(json_decode($_POST['user'], true), $_FILES['picture']);
+
+        break;
+      case 'edit':
+        $user->edit(json_decode($_POST['user'], true), $_FILES['picture']);
+
+        break;
+      case 'remove':
+        $user->remove($_POST['id']);
+
+        break;
+      default:
+        http_response_code(405);
+    }
+
+    break;
+  case 'PUT':
+    
+
+    break;
+  case 'DELETE':
+    $user->delete();
+  
+    break;
 	case 'OPTIONS':
     break;
 	default:
-		http_response_code(405);
 
     break;
 }
