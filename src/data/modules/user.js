@@ -37,8 +37,9 @@ export const module = {
     },
     _logout(_ctx) {
       return APIRequest(_ctx, {
-        type: 'DELETE',
-        action: 'remove'
+        type: 'POST',
+        action: 'remove',
+        body: {}
       })
     }
   }

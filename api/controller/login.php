@@ -15,13 +15,20 @@ $vtm = new VTM($sql);
 $user = new User($vtm);
 
 switch ($_SERVER['REQUEST_METHOD']) {
-	case 'POST':
-		$user->requestAuthToken($_POST['username'], $_POST['password']);
-		
-		break;
-	case 'DELETE':
-		$user->clearAuthToken($_SERVER['HTTP_AUTH_TOKEN']);
+  case 'POST':
+    switch ($_POST['action']) {
+      case 'load':
+        $user->requestAuthToken($_POST['username'], $_POST['password']);
 
+        break;
+      case 'remove':
+        $user->clearAuthToken($_SERVER['HTTP_AUTH_TOKEN']);
+
+        break; 
+      default:
+        http_response_code(405);
+    }
+		
 		break;
 	case 'OPTIONS':
     break;

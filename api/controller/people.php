@@ -58,7 +58,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
     break;
 	case 'OPTIONS':
     break;
-	default:
+  default:
+    http_response_code(405);
 
     break;
 }
