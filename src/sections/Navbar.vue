@@ -9,8 +9,7 @@
         <language-selector class="right hide-on-med-and-down"></language-selector>
         <div class="container">
           <router-link class="hide-on-large-only" to="/!" style="padding: 6px 0;">
-						<img :src="require('@/assets/imgs/igp-wide.jpg')" style="height:44px;">
-						<!--<i class="material-icons color-main hide-on-large-only">home</i>-->
+						<img :src="require('@/assets/imgs/igp-wide.jpg')" style="height:44px; position: absolute; top: 6px;">
 					</router-link>
 					<router-link :to="`${activePage.href}/!`" class="hide-on-med-and-down brand-logo color-main" style="padding: 6px 0;">
 						<img :src="require('@/assets/imgs/igp-wide.jpg')" style="height:52px;">
