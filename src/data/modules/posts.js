@@ -23,13 +23,13 @@ export const module = {
 		},
     create(_state, _data) {
 			let t = new Date().getTime()
-			for (let i of _data) {
+			for (let i of _data.items) {
 				i.cached = t
 				Vue.set(_state.items, i.id, i)
 			}
     },
     edit(_state, _data) {
-      Vue.set(_state.items, _data.id, _data)
+      Vue.set(_state.items, _data.item.id, _data.item)
     },
     remove(_state, _data) {
       Vue.delete(_state.items, _data.id)
@@ -41,6 +41,30 @@ export const module = {
         type: 'GET',
         action: 'list',
 				resource: {}
+      })
+    },
+    _create(_ctx, _data) {
+      return APIRequest(_ctx, {
+        type: 'POST',
+        action: 'create',
+        resource: {},
+        body: _data
+      })
+    },
+    _edit(_ctx, _data) {
+      return APIRequest(_ctx, {
+        type: 'POST',
+        action: 'edit',
+        resource: {},
+        body: _data
+      })
+    },
+    _remove(_ctx, _data) {
+      return APIRequest(_ctx, {
+        type: 'POST',
+        action: 'remove',
+        resource: {},
+        body: _data
       })
     }
   }

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { store } from './data/index'
 
 import Home from './pages/Home'
 //import Passivhaus from '@/pages/Passivhaus'
@@ -35,7 +36,15 @@ export const router = new Router({
 		{
 			path: '/admin/:target?',
 			name: 'Admin',
-			component: Admin
+      component: Admin,
+      beforeEnter: (to, from, next) => {
+        let u = store.getters['user/get']()
+        if (!u || !u.access['v']) {
+          next(from)
+        } else {
+          next()
+        }
+      }
 		},
 		{
 			path: '/blog/:target?',

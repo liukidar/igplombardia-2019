@@ -5,18 +5,4 @@ define("F_CREATE", 'c');
 define("F_EDIT", 'e');
 define("F_REMOVE", 'd');
 define("F_SU", 'su');
-define("ACCESS_CODES", ['v' => F_VIEW, 'c' => F_CREATE, 'e' => F_EDIT, 'd' => F_REMOVE, 'su' => F_SU]);
-
-function flag2access($flag) {
-	$r = [];
-	foreach(ACCESS_CODES as $code => $value) {
-		$r[$value] = false;
-	}
-
-	$codes = explode('-', $flag);
-	foreach($codes as $code) {
-		$r[ACCESS_CODES[$code]] = true;
-	}
-
-	return $r;
-}
+define("ACCESS_FLAGS", ['v', 'c', 'e', 'd', 'su']);

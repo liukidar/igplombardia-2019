@@ -41,17 +41,16 @@ class VTP
         $first_parent_to_link = NULL;
         $last_child_id = $to_table_id;
         $last_link_type = VTOL_CHILD;
-        $join_type = 'LEFT';
       }
       // Check if the table is a parent
       else {
         $link = $_VTO->parents[$_field[$i]];
         $last_link_type = VTOL_PARENT;
-        $join_type = 'INNER';
-      }
-      // Link not found
-      if(!isset($link)) {
-        $this->VTM->throw_error('Invalid link', $_field[$i]);
+
+        // Link not found
+        if(!isset($link)) {
+          $this->VTM->throw_error('Invalid link', $_field[$i]);
+        }
       }
       // Load table
       $link_VTO = $this->VTM->requireVTO($link->table);
@@ -85,7 +84,7 @@ class VTP
         }
 
         // Join table
-        $joined_tables[$to_table_id] = ' '.$join_type.' JOIN ' . $link_VTO->name . ' AS ' . $to_table_id . ' ON ' . $condition; //TODO option for INNER
+        $joined_tables[$to_table_id] = ' '.$link->join_type.' JOIN ' . $link_VTO->name . ' AS ' . $to_table_id . ' ON ' . $condition; //TODO option for INNER
       }
 
       // Update values for next iteration

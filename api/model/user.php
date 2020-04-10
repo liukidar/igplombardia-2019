@@ -51,7 +51,7 @@ class User
   private $remotePath;
 	private $localPath;
 
-	public function __construct($_VTM, $_remoteHost, $_localHost, $_path)
+	public function __construct($_VTM, $_remoteHost = NULL, $_localHost = NULL, $_path = NULL)
 	{
 		$this->VTM = $_VTM;
 		$this->remotePath = $_remoteHost . $_path;
@@ -59,12 +59,12 @@ class User
   }
   
   public function row2el(&$_row) {
-    $_row['curriculum'] = $_row['curriculum'] ? $this->remotePath . self::CURRICULUM_DIR . $_row['curriculum'] : null;
-    $_row['picture'] = $_row['picture'] ? $this->remotePath . self::PICTURE_DIR . $_row['picture'] : null;
+    $_row['curriculum'] = $_row['curriculum'] ? $this->remotePath . self::CURRICULUM_DIR . $_row['curriculum'] : '';
+    $_row['picture'] = $_row['picture'] ? $this->remotePath . self::PICTURE_DIR . $_row['picture'] : '';
     $_row['types'] = flag2dict($_row['types'], self::USER_TYPES);
     $_row['access'] = flag2dict($_row['access'], self::USER_FLAGS);
-    $_row['roles'] = $_row['roles'] ? explode(';', $_row['roles']) : null;
-    $_row['qualifications'] = $_row['qualifications'] ? explode(';', $_row['qualifications']) : null;
+    $_row['roles'] = $_row['roles'] ? explode(';', $_row['roles']) : '';
+    $_row['qualifications'] = $_row['qualifications'] ? explode(';', $_row['qualifications']) : '';
 
     return $_row;
   }
@@ -76,16 +76,19 @@ class User
       $row[$field] = $_el[$field];
     }
 
-    if ($row['roles']) {
+    if (isset($row['picture'])) {
+      $row['picture'] = str_replace($this->remotePath . self::PICTURE_DIR, '', $row['picture']);
+    }
+    if (isset($row['roles'])) {
       $row['roles'] = implode(';', $row['roles']);
     }
-    if ($row['qualifications']) {
+    if (isset($row['qualifications'])) {
       $row['qualifications'] = implode(';', $row['qualifications']);
     }
-    if ($row['types']) {
+    if (isset($row['types'])) {
       $row['types'] = dict2Flag($row['types'], self::USER_TYPES);
     }
-    if ($row['access']) {
+    if (isset($row['access'])) {
       $row['access'] = dict2Flag($row['access'], self::USER_FLAGS);
     }
 
@@ -96,7 +99,7 @@ class User
 	{
     // Access flag is public, don't think it really matters here.
 		$res = $this->VTM->get('user.list', [
-			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles', 'qualifications', 'types', 'executive', 'designer', 'artisan', 'location', 'access']
+			'fields' => ['id', 'mail', 'username', 'curriculum', 'picture', 'roles', 'qualifications', 'types', 'location', 'access']
 		]);
 
 		$r = [];
@@ -138,7 +141,7 @@ class User
     $row = $this->el2row($_el, ['mail', 'username', 'roles', 'qualifications', 'types', 'location', 'access', 'picture']);
 
     if ($_picture && in_array($_picture['type'], self::ALLOWED_TYPES)) {
-      $r = $this->VTM->get('user.person', ['fields' => ['picture'], 'where' => 'id = ?', 'params' => [$_el['id']]]);
+      $r = $this->VTM->get('user.get', ['fields' => ['picture'], 'where' => 'id = ?', 'params' => [$_el['id']]]);
       $previous_picture = $r->next()['picture'];
       if ($previous_picture) {
         unlink($this->localPath.self::PICTURE_DIR.$previous_picture);
@@ -183,7 +186,7 @@ class User
 			'fields' => ['id', 'mail', 'password', 'access', 'username'],
 			'where' => 'mail = ?',
 			'params' => [$_mail]
-		]);
+    ]);
 		while($user = $res->next()) {
 			if(password_verify($_password, $user['password'])) {
 				// Token granted
@@ -193,7 +196,7 @@ class User
 				]);
 
 				setHeader(AUTH_TOKEN, $token);
-				setData('user', ['id' => $user['id'], 'mail' => $user['mail'], 'username' => $user['username'], 'access' => flag2access($user['access'])]);
+				setData('user', ['id' => $user['id'], 'mail' => $user['mail'], 'username' => $user['username'], 'access' => flag2dict($user['access'], ACCESS_FLAGS)]);
 
 				return true;
 			}
@@ -254,7 +257,7 @@ class User
 				setHeader('Auth-Token', $_token);
 			}
 
-			$r = flag2access($_user['user.access']);
+			$r = flag2dict($_user['user.access'], ACCESS_FLAGS);
 
 			return $r;
 		}

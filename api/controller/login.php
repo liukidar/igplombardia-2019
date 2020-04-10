@@ -20,7 +20,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 		
 		break;
 	case 'DELETE':
-		$user->clearAuthToken($_SERVER[HTTP_AUTH_TOKEN]);
+		$user->clearAuthToken($_SERVER['HTTP_AUTH_TOKEN']);
 
 		break;
 	case 'OPTIONS':

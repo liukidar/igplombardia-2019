@@ -20,14 +20,17 @@ class _Parent
   public $table;
   // Linked field
   public $to_field;
+  // Join type
+  public $join_type;
   // Condition
   public $condition;
 
-  public function __construct($_from_field, $_table, $_to_field, $_condition = NULL)
+  public function __construct($_from_field, $_table, $_to_field, $_join_type = 'INNER', $_condition = NULL)
   {
     $this->from_field = $_from_field;
     $this->table = $_table;
     $this->to_field = $_to_field;
+    $this->join_type = $_join_type;
     $this->condition = [VTOQ_GET => $_condition['get-on'], VTOQ_PUT => $_condition['update-on'] ?: $_condition['get-on'], VTOQ_DELETE => $_condition['delete-on'] ?: $_condition['get-on']];
   }
 }
@@ -38,11 +41,13 @@ class _Parent
 class _Child
 {
   public $table;
+  public $join_type;
   public $condition;
 
   public function __construct($_table, $_condition)
   {
     $this->table = $_table;
+    $this->join_type = 'LEFT';
     $this->condition = [VTOQ_GET => $_condition['get-on'], VTOQ_PUT => $_condition['update-on'] ?: $_condition['get-on'], VTOQ_DELETE => $_condition['delete-on'] ?: $_condition['get-on']];
   }
 }

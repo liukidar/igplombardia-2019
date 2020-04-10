@@ -25,6 +25,19 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     break;
   case 'POST':
+    $token = $user->checkAuthToken($_SERVER['HTTP_AUTH_TOKEN']);
+    if (!$token) {
+      http_response_code(401);
+
+      break;
+    }
+    if ($token[F_SU] == FALSE) {
+      pushError("UNAUTHORIZED");
+      http_response_code(403);
+
+      break;
+    }
+
     switch ($_POST['action']) {
       case 'create':
         $user->create(json_decode($_POST['user'], true), $_FILES['picture']);
@@ -42,14 +55,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
         http_response_code(405);
     }
 
-    break;
-  case 'PUT':
-    
-
-    break;
-  case 'DELETE':
-    $user->delete();
-  
     break;
 	case 'OPTIONS':
     break;

@@ -2,7 +2,8 @@
   <div class="pg-blog">
     <div id ="projects" class="container">
       <div class="row">
-        <post v-for="el in getPosts()" class="col s12 m6 l4 center-align" :key="el.id" :image="el.picture" :title="el.title" :author="el.username" :qualifications="el.qualifications" :to="el.link" :location="el.location" /></div>
+        <post v-for="el in getPosts()" class="col s12 m6 l4 center-align" :key="el.id" :image="el.picture" :title="el.title" :author="el.author" :qualifications="el.qualifications" :to="el.link" :location="el.location" />
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +28,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
