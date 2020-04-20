@@ -7,10 +7,25 @@
           <i class="material-icons">link</i>
         </div>
       </div>
-      <div class="cmp-description white card-padding waves-effect left-align" slot="description" slot-scope="layer" @click="(e) => layer.set(e, '', 'white')">
-        <h6 class ="capitalize">{{data.qualifications.split(';').join(' - ')}}</h6>
-        <h4 class ="capitalize">{{data.author}}</h4>
-        <p class="flow-text capitalize">{{data.year}} - {{data.location}}</p>
+      <div class="cmp-description capitalize white card-padding waves-effect left-align" slot="description" slot-scope="layer" @click="(e) => layer.set(e, '', 'white')">
+        <h5>{{data.title}}</h5>
+        <h4>{{data.author}}</h4>
+        <h6>{{data.qualifications.split(';').join(' - ')}}</h6>
+        <div class="right-align">
+          <br>
+          <p class="flow-text capitalize">
+            {{data.year}} <i class="material-icons">today</i>
+          </p>
+          <p class="flow-text capitalize">
+            {{data.location}} <i class="material-icons inline">location_on</i>
+          </p>
+          <p class="flow-text capitalize">
+            {{data.material}} <i class="material-icons inline">house</i>
+          </p>
+          <p class="flow-text capitalize">
+            {{data.area}} <i class="material-icons inline">crop</i>
+          </p>
+        </div>
         <div class="cmp-learnmore center-align">
           <a :href="data.link" target="_blank" class="btn-hm accent waves-effect color-main">
             LEARN MORE
@@ -64,6 +79,11 @@ export default {
   position: relative;
   padding: 2rem 3rem;
 }
+.cmp-description i.material-icons {
+  position: relative;
+  top: 3px;
+}
+
 .cmp-learnmore {
   position: absolute;
   bottom: 0;

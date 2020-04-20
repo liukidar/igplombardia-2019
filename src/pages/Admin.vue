@@ -127,7 +127,7 @@
         </div>
         <div class="input-field col s6 l2">
           <i class="material-icons prefix">crop</i>
-          <input v-model="selectedPost.Area" type="text" id="post-area" />
+          <input v-model="selectedPost.area" type="text" id="post-area" />
           <label for="post-area">Area</label>
         </div>
         <div class="input-field col s12 l8">
