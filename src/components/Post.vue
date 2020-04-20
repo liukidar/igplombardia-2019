@@ -1,18 +1,18 @@
 <template>
   <div class="cmp-cmp-event-card col s12 m6 l4">
     <layer class="cmp-card z-depth-2" >
-      <div slot-scope="layer" class="cmp-body white" :style="{'background-image': 'url(\'' + image + '\')'}" @click="(e) => layer.set(e, 'description', 'white')">
+      <div slot-scope="layer" class="cmp-body white" :style="{'background-image': 'url(\'' + data.picture + '\')'}" @click="(e) => layer.set(e, 'description', 'white')">
         <div class=" flex-fill white-text waves-effect waves-light" >
-          <h4>{{title}}</h4>
+          <h4>{{data.title}}</h4>
           <i class="material-icons">link</i>
         </div>
       </div>
       <div class="cmp-description white card-padding waves-effect left-align" slot="description" slot-scope="layer" @click="(e) => layer.set(e, '', 'white')">
-        <h6 class ="capitalize">{{qualifications.split(';').join(' - ')}}</h6>
-        <h4 class ="capitalize">{{author}}</h4>
-        <p class="flow-text capitalize">{{location}}</p>
+        <h6 class ="capitalize">{{data.qualifications.split(';').join(' - ')}}</h6>
+        <h4 class ="capitalize">{{data.author}}</h4>
+        <p class="flow-text capitalize">{{data.year}} - {{data.location}}</p>
         <div class="cmp-learnmore center-align">
-          <a :href="to" target="_blank" class="btn-hm accent waves-effect color-main">
+          <a :href="data.link" target="_blank" class="btn-hm accent waves-effect color-main">
             LEARN MORE
           </a>
         </div>
@@ -24,7 +24,7 @@
 <script>
 import Layer from './Layer'
 export default {
-  props: ['to', 'title', 'author', 'qualifications', 'image', 'location'],
+  props: ['data'],
   components: { Layer }
 }
 </script>
@@ -62,7 +62,7 @@ export default {
 
 .cmp-description {
   position: relative;
-  padding: 2rem 4rem;
+  padding: 2rem 3rem;
 }
 .cmp-learnmore {
   position: absolute;
