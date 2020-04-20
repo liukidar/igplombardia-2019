@@ -18,7 +18,7 @@
           <a class="collapsible-header waves-effect waves-dark">{{$t(`pages.${link.id}.title`)}}<i class="material-icons">arrow_drop_down</i></a>
           <div class="collapsible-body">
             <ul>
-              <li v-for="section in link.sections" :key="section">
+              <li v-for="section in link.sections" :key="section" @click="sidenav.close()">
                 <router-link :to="link.href + '/' + section" class="waves-effect waves-dark">{{$t(`pages.${link.id}.sections.${section}.title`)}}</router-link>
               </li>
             </ul>
@@ -34,11 +34,16 @@ import LanguageSelector from '@/components/LanguageSelector'
 import { mapGetters } from 'vuex'
 
 export default {
+  data: function() {
+    return {
+      sidenav: null
+    }
+  },
   computed: {
     ...mapGetters('app', ['pages']),
   },
   mounted: function() {
-    M.Sidenav.init(this.$el, { edge: 'right' })
+    this.sidenav = M.Sidenav.init(this.$el, { edge: 'right' })
     let elem = document.querySelectorAll('.collapsible')
     M.Collapsible.init(elem)
   },
