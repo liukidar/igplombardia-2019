@@ -138,7 +138,7 @@ export default {
 			}
 		},
 		blog: {
-			title: 'Blog',
+			title: 'Progetti',
 			sections: {
 				events: {
 					title: 'Eventi'
