@@ -13,16 +13,16 @@
         <h6>{{data.qualifications.split(';').join(' - ')}}</h6>
         <div class="right-align">
           <br>
-          <p class="flow-text capitalize">
+          <p v-if="data.year" class="flow-text capitalize">
             {{data.year}} <i class="material-icons">today</i>
           </p>
-          <p class="flow-text capitalize">
+          <p v-if="data.location" class="flow-text capitalize">
             {{data.location}} <i class="material-icons inline">location_on</i>
           </p>
-          <p class="flow-text capitalize">
+          <p v-if="data.material" class="flow-text capitalize">
             {{data.material}} <i class="material-icons inline">house</i>
           </p>
-          <p class="flow-text capitalize">
+          <p v-if="data.area" class="flow-text capitalize">
             {{data.area}} <i class="material-icons inline">crop</i>
           </p>
         </div>
