@@ -120,6 +120,23 @@
         </div>
       </div>
       <div class="row">
+        <div class="input-field col s6 l2">
+          <i class="material-icons prefix">today</i>
+          <input v-model="selectedPost.year" type="text" id="post-year" />
+          <label for="post-year">Year</label>
+        </div>
+        <div class="input-field col s6 l2">
+          <i class="material-icons prefix">crop</i>
+          <input v-model="selectedPost.Area" type="text" id="post-area" />
+          <label for="post-area">Area</label>
+        </div>
+        <div class="input-field col s12 l8">
+          <i class="material-icons prefix">house</i>
+          <input v-model="selectedPost.material" type="text" id="post-material" />
+          <label for="post-material">Material</label>
+        </div> 
+      </div>
+      <div class="row">
         <div class="col s12">
           <div class="col">
             <button v-if="user.access.c == true" @click="createPost" class="btn btn-large bkg-main">NEW</button>
@@ -187,7 +204,10 @@ export default {
         link: '',
         author: '',
         location: '',
-        picture: ''
+        picture: '',
+        year: '',
+        material: '',
+        area: ''
       }
     },
     updateUserAutocomplete() {
