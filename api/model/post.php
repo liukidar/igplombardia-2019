@@ -40,7 +40,7 @@ class Post
   public function list()
 	{
 		$res = $this->VTM->get('post.list', [
-			'fields' => ['id', 'title', 'link', 'authorid', 'location', 'picture', 'author.username' => 'author', 'author.id' => 'authorid', 'author.qualifications' => 'qualifications']
+			'fields' => ['id', 'title', 'link', 'authorid', 'location', 'year', 'material', 'area', 'picture', 'author.username' => 'author', 'author.id' => 'authorid', 'author.qualifications' => 'qualifications']
 		]);
 
 		$r = [];
@@ -55,7 +55,7 @@ class Post
   
   public function create($_el, $_picture)
   {
-    $row = $this->el2row($_el, ['title', 'link', 'authorid', 'location', 'picture']);
+    $row = $this->el2row($_el, ['title', 'link', 'authorid', 'location', 'year', 'material', 'area', 'picture']);
 
 		if ($_picture && in_array($_picture['type'], self::ALLOWED_TYPES)) {
       $r = move_uploaded_file($_picture['tmp_name'], $this->localPath . self::PICTURE_DIR . $_picture['name']);
@@ -79,7 +79,7 @@ class Post
   
   public function edit($_el, $_picture)
   {
-    $row = $this->el2row($_el, ['title', 'link', 'authorid', 'location', 'picture']);
+    $row = $this->el2row($_el, ['title', 'link', 'authorid', 'location', 'year', 'material', 'area', 'picture']);
 
     if ($_picture && in_array($_picture['type'], self::ALLOWED_TYPES)) {
       $r = $this->VTM->get('post.get', ['fields' => ['picture'], 'where' => 'id = ?', 'params' => [$_el['id']]]);
